@@ -1,54 +1,49 @@
 import { useWalletConnectModal } from '@walletconnect/modal-react-native';
-import { Web3Provider } from '@ethersproject/providers';
+import { ethers } from 'ethers';
 
+/**
+ * Hook to manage Ethereum connection using WalletConnect.
+ */
 export const useEthereum = () => {
   const { isConnected, open, provider, address } = useWalletConnectModal();
 
   const openModal = async () => {
     try {
-      console.log('🔓 Membuka WalletConnect modal...');
+      console.log('🔓 Opening WalletConnect modal...');
       await open();
-      console.log('✅ Modal terbuka');
     } catch (e) {
-      console.warn('⚠️ Gagal openModal:', e.message || e);
+      console.warn('⚠️ Failed to open modal:', e.message || e);
     }
   };
 
   const getSigner = async () => {
     if (!provider) {
-      console.warn('⚠️ Provider tidak tersedia');
+      console.warn('⚠️ Provider not available');
       return null;
     }
 
     try {
-      const ethersProvider = new Web3Provider(provider);
-      const signer = ethersProvider.getSigner();
+      // Use BrowserProvider for Ethers v6
+      const ethersProvider = new ethers.BrowserProvider(provider);
+      const signer = await ethersProvider.getSigner();
       const addr = await signer.getAddress();
       console.log('🧩 Signer address:', addr);
       return signer;
     } catch (e) {
-      console.warn('⚠️ Gagal getSigner:', e.message || e);
+      console.warn('⚠️ Failed to get signer:', e.message || e);
       return null;
     }
   };
 
   const safeDisconnect = async () => {
     try {
-      const topic = provider?.session?.topic;
-      if (!topic) {
-        console.log('⛔ Tidak ada session topic, skip disconnect');
-        return;
-      }
-
-      console.log('🔌 Mencoba disconnect (topic:', topic, ')');
+      if (!provider) return;
+      
+      console.log('🔌 Disconnecting...');
       await provider.disconnect();
-      console.log('✅ Berhasil disconnect');
+      console.log('✅ Disconnected');
     } catch (err) {
-      if (err.message?.includes('No matching key')) {
-        console.warn('⚠️ Session tidak valid, skip disconnect');
-      } else {
-        console.warn('⚠️ Gagal disconnect:', err.message || err);
-      }
+      console.warn('⚠️ Failed to disconnect:', err.message || err);
     }
   };
 

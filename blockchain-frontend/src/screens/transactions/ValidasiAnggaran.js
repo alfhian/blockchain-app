@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, View, StyleSheet } from 'react-native';
+import { ScrollView, View, StyleSheet, Alert } from 'react-native';
 import { Dropdown } from 'react-native-paper-dropdown';
-import { Dialog, Portal, Card, Button, Text, TextInput, useTheme } from 'react-native-paper';
+import { Dialog, Portal, Button, Text, TextInput, useTheme } from 'react-native-paper';
 import DrawerWithContent from '../../navigation/DrawerWithContent';
 import { useEthereum } from '../../hooks/useWalletConnect';
-import { getAnggaranUntukUKM, getUserDetails, getAnggaranUntukUKMById, validasiDana } from '../../utils/blockchain';
-import { getPublicRpcProvider } from '../../utils/getPublicRpcProvider';
+import { getAnggaranUntukUKM, getUserDetails, getAnggaranUntukUKMById, validasiDana, getProvider } from '../../utils/blockchain';
 
+/**
+ * Screen for UKM to validate received budget allocations.
+ */
 export default function ValidasiAnggaran({ navigation }) {
   const [id, setId] = useState('');
-	const [idOptions, setIdOptions] = useState([]);
+  const [idOptions, setIdOptions] = useState([]);
   const [idPemerintah, setIdPemerintah] = useState('');
   const [idMitraUKM, setIdMitraUKM] = useState('');
   const [kegiatan, setKegiatan] = useState('');
@@ -17,232 +19,292 @@ export default function ValidasiAnggaran({ navigation }) {
   const [kodeRegulasi, setKodeRegulasi] = useState('');
   const [kodeUKM, setKodeUKM] = useState('');
   const [anggaran, setAnggaran] = useState('');
-	const { getSigner, address } = useEthereum();
-	const [message, setMessage] = useState(null);
-	const [process, setProcess] = useState(null);
-	const [loading, setLoading] = useState(false);
-	const [visible, setVisible] = useState(false);
-	const { colors } = useTheme();
+  
+  const { getSigner, address } = useEthereum();
+  
+  const [message, setMessage] = useState(null);
+  const [process, setProcess] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const { colors } = useTheme();
 
-	const loadAnggaranUKM = async () => {
-		try {
-			const ids = await getAnggaranUntukUKM(address);
-			const [roleUser, kodeUser, namaUser, kontakUser] = await getUserDetails(address);
+  const loadAnggaranUKM = async () => {
+    if (!address) return;
+    try {
+      const ids = await getAnggaranUntukUKM(address);
+      const [,,, ] = await getUserDetails(address); // Just to ensure user exists
+      
+      // We'll get kodeUKM from the specific budget details later or from a separate call
+      const userData = await getUserDetails(address);
+      setKodeUKM(userData[1] || '');
+      
+      setIdOptions(ids);
+    } catch (err) {
+      console.error("Gagal ambil ID anggaran:", err);
+    }
+  };
 
-			setKodeUKM(kodeUser);
-			setIdOptions(ids);
-			setId('');
-		} catch (err) {
-			console.error("Gagal ambil ID anggaran:", err);
-		}
-	};
+  const handleSelectAnggaran = async (selectedId) => {
+    if (!selectedId) {
+      resetForm();
+      return;
+    }
+    try {
+      const data = await getAnggaranUntukUKMById(selectedId, address);
+      // Data format from blockchain.js: [kodePemerintah, kodeRegulasi, formattedTotal, rawTotal, kegiatan, kodeMitra, formattedAlokasi]
+      setIdPemerintah(data[0]);
+      setKodeRegulasi(data[1]);
+      setAnggaranPemerintah(data[2]);
+      setKegiatan(data[4]);
+      setIdMitraUKM(data[5]);
+      setAnggaran(data[6]);
+    } catch (err) {
+      console.error("Gagal load detail anggaran:", err);
+      Alert.alert("Error", "Gagal mengambil detail anggaran.");
+    }
+  };
 
-	const handleSelectAnggaran = async (id) => {
-		const data = await getAnggaranUntukUKMById(id, address);
+  const resetForm = () => {
+    setIdPemerintah('');
+    setKodeRegulasi('');
+    setAnggaranPemerintah('');
+    setKegiatan('');
+    setIdMitraUKM('');
+    setAnggaran('');
+  };
 
-		setIdPemerintah(data[0]);
-		setKodeRegulasi(data[1]);
-		setAnggaranPemerintah(data[2]);
-		setKegiatan(data[4]);
-		setIdMitraUKM(data[5]);
-		setAnggaran(data[6]);
-	};
-
-	useEffect(() => {
-		loadAnggaranUKM();
-	}, []);
-
+  useEffect(() => {
+    loadAnggaranUKM();
+  }, [address]);
 
   const handleValidasiAnggaran = async () => {
-		setLoading(true);
+    if (!id) {
+      Alert.alert('Validasi', 'Pilih ID Transaksi terlebih dahulu.');
+      return;
+    }
 
-		try {
-			const signer = await getSigner();
-			if (!signer) {
-				Alert.alert('Signer Error', 'Wallet belum tersedia.');
-				return;
-			}
+    setLoading(true);
+    try {
+      const signer = await getSigner();
+      if (!signer) {
+        Alert.alert('Signer Error', 'Wallet belum terkoneksi.');
+        setLoading(false);
+        return;
+      }
 
-			const txHash = await validasiDana(signer, id);
-			console.log('📦 Transaksi berhasil dikirim dengan hash:', txHash);
+      const txHash = await validasiDana(signer, id);
+      console.log('Validasi tx sent:', txHash);
 
-			const chainId = 11155111;
-			const ethersProvider = getPublicRpcProvider(chainId);
-			const receipt = await ethersProvider.waitForTransaction(txHash);
+      const provider = getProvider();
+      const receipt = await provider.waitForTransaction(txHash);
 
-			if (receipt.status === 1) {
-				setId('');
-				setIdPemerintah('');
-				setKodeRegulasi('');
-				setAnggaranPemerintah('');
-				setKegiatan('');
-				setIdMitraUKM('');
-				setAnggaran('');
-
-				setProcess('Sukses');
-				setMessage('Anda berhasil validasi anggaran!');
-				setVisible(true);
-			} else {
-				setProcess('Sukses');
-				setMessage('Anda berhasil validasi anggaran');
-				setVisible(true);
-			}
-
-		} catch (err) {
-			console.error('Gagal transaksi:', err);
-			const errmsg = err?.reason || err?.message || 'Gagal validasi anggaran';
-			setProcess('Gagal');
-			setMessage(errmsg);
-			setVisible(true);
-		} finally {
-			setLoading(false);
-		}
-	};
+      if (receipt && receipt.status === 1) {
+        setProcess('Sukses');
+        setMessage('Anda berhasil validasi anggaran!');
+        setId('');
+        resetForm();
+        loadAnggaranUKM(); // Refresh list
+      } else {
+        setProcess('Gagal');
+        setMessage('Transaksi gagal di blockchain.');
+      }
+      setVisible(true);
+    } catch (err) {
+      console.error('Gagal validasi:', err);
+      const errmsg = err?.reason || err?.message || 'Gagal validasi anggaran';
+      setProcess('Gagal');
+      setMessage(errmsg);
+      setVisible(true);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-		<DrawerWithContent navigation={navigation}>
-			<ScrollView contentContainerStyle={[styles.container, { backgroundColor: colors.background }]}>
-				<Text 
-					variant="titleLarge"
-					style={{marginBottom: 20, color: colors.inverseSurface }}
-				>Form Validasi UKM</Text>
-				
-				<Dropdown
-					label="ID Transaksi"
-					placeholder="Pilih ID Anggaran"
-					options={[{ label: '--- Pilih Transaksi ---', value: '' }, ...idOptions]} 
-					value={id}
-					onSelect={(selectedId) => {
-						setId(selectedId);
-						handleSelectAnggaran(selectedId);
-					}}
-				/>
-			
-				<TextInput
-					label="ID Govern"
-					value={idPemerintah}
-					onChangeText={setIdPemerintah}
-					style={styles.input}
-					disabled
-				/>
+    <DrawerWithContent navigation={navigation}>
+      <ScrollView contentContainerStyle={[styles.container, { backgroundColor: colors.background }]}>
+        <View style={styles.formHeader}>
+          <MaterialIcons name="verified" size={40} color="#10B981" />
+          <Text variant="headlineSmall" style={styles.headerTitle}>
+            Validate Receipt
+          </Text>
+          <Text variant="bodyMedium" style={styles.headerSubtitle}>
+            Confirm that you have received the allocated academic funding
+          </Text>
+        </View>
 
-				<TextInput
-					label="ID Mitra UKM"
-					value={idMitraUKM}
-					onChangeText={setIdMitraUKM}
-					style={styles.input}
-					disabled
-				/>
+        <View style={styles.card}>
+          <Text variant="labelLarge" style={styles.groupLabel}>TRANSACTION SELECTOR</Text>
+          <View style={styles.dropdownWrapper}>
+            <Dropdown
+              label="Active Allocations"
+              placeholder="Select Transaction ID"
+              options={idOptions} 
+              value={id}
+              onSelect={(selectedId) => {
+                setId(selectedId);
+                handleSelectAnggaran(selectedId);
+              }}
+              mode="outlined"
+            />
+          </View>
+        
+          <View style={styles.divider} />
 
-				<TextInput
-					label="ID Regulasi"
-					value={kodeRegulasi}
-					onChangeText={setKodeRegulasi}
-					style={styles.input}
-					disabled
-				/>
+          <Text variant="labelLarge" style={styles.groupLabel}>FUNDING ORIGIN</Text>
+          <TextInput
+            label="Government Agency"
+            value={idPemerintah}
+            style={styles.input}
+            disabled
+            mode="outlined"
+            left={<TextInput.Icon icon="bank-outline" />}
+          />
 
-				<TextInput
-					label="Anggaran"
-					value={anggaranPemerintah}
-					style={styles.input}
-					disabled
-				/>
+          <TextInput
+            label="Mitra Coordinator"
+            value={idMitraUKM}
+            style={styles.input}
+            disabled
+            mode="outlined"
+            left={<TextInput.Icon icon="account-tie-outline" />}
+          />
 
-				<Text
-					label="Kode Kegiatan"
-					value={kegiatan}
-					style={styles.input}
-					disabled
-				/>
+          <TextInput
+            label="Regulation Reference"
+            value={kodeRegulasi}
+            style={styles.input}
+            disabled
+            mode="outlined"
+          />
 
-				<View style={styles.dividerContainer}>
-					<View style={styles.line} />
-					<Text style={[styles.text, { color: colors.inverseSurface }]}>Peserta Kegiatan</Text>
-					<View style={styles.line} />
-				</View>
+          <View style={styles.infoRow}>
+             <MaterialIcons name="event-note" size={20} color="#94A3B8" />
+             <Text style={styles.infoText}>Activity: {kegiatan || '-'}</Text>
+          </View>
 
-				<View style={{marginBottom: 20}}>
-					<TextInput
-						label="Kode UKM"
-						value={kodeUKM}
-						style={styles.input}
-						disabled
-					/>
+          <View style={styles.divider} />
 
-					<TextInput
-						label="Anggaran"
-						value={anggaran}
-						style={styles.input}
-						disabled
-					/>
-				</View>
+          <Text variant="labelLarge" style={[styles.groupLabel, { color: '#10B981' }]}>YOUR ALLOCATION</Text>
+          
+          <View style={styles.amountCard}>
+            <Text style={styles.amountLabel}>Confirmed Amount (IDR)</Text>
+            <Text style={styles.amountValue}>{anggaran || '0'}</Text>
+          </View>
 
-				<Button
-					mode="contained"
-					onPress={handleValidasiAnggaran}
-					disabled={
-						(kodeRegulasi === '' || anggaranPemerintah === '' || loading)
-					}
-					loading={loading}
-					style={{marginTop: 20}}
-				>
-						Validasi
-				</Button>
-			</ScrollView>
-			<Portal>
-        <Dialog visible={visible} onDismiss={() => setVisible(false)}>
-          <Dialog.Title>Validasi {process || '...'}</Dialog.Title>
+          <Button
+            mode="contained"
+            onPress={handleValidasiAnggaran}
+            disabled={!id || loading}
+            loading={loading}
+            style={[styles.submitButton, { backgroundColor: '#10B981' }]}
+            contentStyle={{ height: 50 }}
+            labelStyle={{ fontWeight: 'bold' }}
+          >
+            Confirm Receipt
+          </Button>
+        </View>
+      </ScrollView>
+
+      <Portal>
+        <Dialog visible={visible} onDismiss={() => setVisible(false)} style={styles.dialog}>
+          <Dialog.Title style={{ color: process === 'Sukses' ? '#10B981' : '#EF4444' }}>
+            {process === 'Sukses' ? 'Validation Successful' : 'Validation Failed'}
+          </Dialog.Title>
           <Dialog.Content>
-            <Text>{message || '...'}</Text>
+            <Text variant="bodyLarge">{message}</Text>
           </Dialog.Content>
           <Dialog.Actions>
-            <Button onPress={() => setVisible(false)}>OK</Button>
+            <Button onPress={() => setVisible(false)} textColor={colors.primary}>OK</Button>
           </Dialog.Actions>
         </Dialog>
       </Portal>
-		</DrawerWithContent>
+    </DrawerWithContent>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-		marginTop: 50,
-		paddingBottom: 100,
+    padding: 20,
+    paddingTop: 40,
+    paddingBottom: 40,
   },
-	input: {
-		marginVertical: 10,
-	},
-	submit: {
-		width: '100%',
-		borderRadius: 0, // opsional: biar sudut bawah rata jika di bawah
-	},
-	buttonContainer: {
-		width: '100%',
-		position: 'absolute',
-		bottom: 0,
-		left: 0,
-		right: 0,
-		padding: 16
-	},
-  title: {
-    marginBottom: 24,
+  formHeader: {
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  headerTitle: {
+    color: '#F8FAFC',
+    fontWeight: '800',
+    marginTop: 10,
+  },
+  headerSubtitle: {
+    color: '#94A3B8',
     textAlign: 'center',
+    marginTop: 4,
   },
-	dividerContainer: {
+  card: {
+    backgroundColor: '#1E293B',
+    borderRadius: 24,
+    padding: 24,
+    borderWidth: 1,
+    borderColor: '#334155',
+  },
+  groupLabel: {
+    color: '#4CC9F0',
+    marginBottom: 16,
+    fontWeight: '700',
+    letterSpacing: 1,
+  },
+  input: {
+    marginBottom: 16,
+    backgroundColor: '#1E293B',
+  },
+  dropdownWrapper: {
+    marginBottom: 8,
+  },
+  infoRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 20,
+    marginTop: 4,
   },
-  line: {
-    flex: 1,
-    height: 1,
-    backgroundColor: '#ccc',
-  },
-  text: {
-    marginHorizontal: 10,
-    color: '#888',
+  infoText: {
+    color: '#CBD5E1',
+    marginLeft: 8,
     fontSize: 14,
+  },
+  amountCard: {
+    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+    borderRadius: 16,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: 'rgba(16, 185, 129, 0.3)',
+    marginBottom: 24,
+    alignItems: 'center',
+  },
+  amountLabel: {
+    color: '#10B981',
+    fontSize: 12,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+  },
+  amountValue: {
+    color: '#F8FAFC',
+    fontSize: 28,
+    fontWeight: '800',
+    marginTop: 4,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#334155',
+    marginVertical: 24,
+  },
+  submitButton: {
+    borderRadius: 12,
+  },
+  dialog: {
+    backgroundColor: '#1E293B',
+    borderRadius: 20,
   },
 });

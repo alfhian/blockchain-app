@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const screenWidth = Dimensions.get('window').width;
-const chartWidth = screenWidth - 48;
 
 const AnggaranPieChart = ({ stats }) => {
 	const [role, setRole] = useState(null);
@@ -20,41 +19,41 @@ const AnggaranPieChart = ({ stats }) => {
 			if (savedRole === 'PEMERINTAH') {
 				savedData = [
 					{
-						name: 'Belum Dialokasikan',
+						name: 'Unallocated',
 						jumlah: stats?.belumDialokasikan || 0,
-						color: '#ff7675',
-						legendFontColor: '#333',
+						color: '#F59E0B', // Amber
+						legendFontColor: '#CBD5E1',
 						legendFontSize: 12,
 					},
 					{
-						name: 'Menunggu Validasi',
+						name: 'Pending',
 						jumlah: stats?.menungguValidasi || 0,
-						color: '#ffeaa7',
-						legendFontColor: '#333',
+						color: '#3B82F6', // Blue
+						legendFontColor: '#CBD5E1',
 						legendFontSize: 12,
 					},
 					{
-						name: 'Tervalidasi',
+						name: 'Validated',
 						jumlah: stats?.tervalidasi || 0,
-						color: '#55efc4',
-						legendFontColor: '#333',
+						color: '#10B981', // Emerald
+						legendFontColor: '#CBD5E1',
 						legendFontSize: 12,
 					},
 				];
-			} else if (savedRole === 'UKM' || savedRole === 'MITRA') {
+			} else {
 				savedData = [
 					{
-						name: 'Menunggu Validasi',
+						name: 'Pending',
 						jumlah: stats?.menungguValidasi || 0,
-						color: '#ffeaa7',
-						legendFontColor: '#333',
+						color: '#3B82F6',
+						legendFontColor: '#CBD5E1',
 						legendFontSize: 12,
 					},
 					{
-						name: 'Tervalidasi',
+						name: 'Validated',
 						jumlah: stats?.tervalidasi || 0,
-						color: '#55efc4',
-						legendFontColor: '#333',
+						color: '#10B981',
+						legendFontColor: '#CBD5E1',
 						legendFontSize: 12,
 					},
 				];
@@ -67,32 +66,24 @@ const AnggaranPieChart = ({ stats }) => {
 	}, [stats]);
 
 	return (
-		<View >
-			<Text style={{ color: '#fff', textAlign: 'center', fontSize: 18, fontWeight: 'bold', marginBottom: 8 }}>
-				Status Anggaran
-			</Text>
-
+		<View style={{ alignItems: 'center' }}>
 			{data ? (
 					<PieChart
 						data={data}
-						width={180}
-						height={180}
-						center={[45, 0]}
+						width={200}
+						height={200}
+						center={[50, 0]}
 						chartConfig={{
-							backgroundColor: '#ffffff',
-							backgroundGradientFrom: '#ffffff',
-							backgroundGradientTo: '#ffffff',
-							color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+							color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
 						}}
 						accessor="jumlah"
 						backgroundColor="transparent"
 						paddingLeft="0"
 						hasLegend={false}
 						absolute
-						// style={{position: 'absolute', left: 50}}
 					/>
 			) : (
-				<Text style={{ textAlign: 'center' }}>Memuat chart...</Text>
+				<Text style={{ color: '#94A3B8' }}>Loading chart...</Text>
 			)}
 		</View>
 	);
