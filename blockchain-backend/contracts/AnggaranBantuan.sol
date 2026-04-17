@@ -327,11 +327,9 @@ contract AnggaranBantuan is AccessControl {
         
         uint256 alokasiUkm = 0;
         bool found = false;
-        uint256 ukmIndex = 0;
         for (uint i = 0; i < a.ukmTerpilih.length; i++) {
             if (a.ukmTerpilih[i] == ukm) {
                 alokasiUkm = a.alokasi[i];
-                ukmIndex = i;
                 found = true;
                 break;
             }
