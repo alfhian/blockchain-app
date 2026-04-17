@@ -45,153 +45,113 @@ export default function DrawerLayoutWrapper({ navigation, children }) {
 
   const renderNavigationView = () => (
     <View style={styles.drawerContent}>
-      {/* Tombol Close */}
-      <View style={styles.closeButtonContainer}>
-        <IconButton
-          icon="close"
-          size={24}
-          onPress={() => drawer.current?.closeDrawer()}
-        />
+      {/* Profile Header */}
+      <View style={styles.profileHeader}>
+        <View style={styles.avatarContainer}>
+          <MaterialIcons name="account-circle" size={80} color={colors.primary} />
+        </View>
+        <Text style={styles.userName}>{nama}</Text>
+        <Text style={styles.userRole}>{role}</Text>
       </View>
 
-      <Text style={[styles.user, { color: colors.inverseSurface }]}>{nama}</Text>
+      <View style={styles.menuContainer}>
+        <Text style={styles.menuTitle}>MAIN NAVIGATION</Text>
+        
+        <DrawerItem 
+          label="Dashboard" 
+          icon="dashboard" 
+          active={route.name === 'MainApp'}
+          onPress={() => {
+            drawer.current.closeDrawer();
+            navigation.navigate('MainApp');
+          }}
+        />
 
-      <Text style={[styles.title, { color: colors.inverseSurface }]}>Menu Utama</Text>
-
-      <View style={styles.menu}>
         {role === 'PEMERINTAH' && (
-          <>
-            <Button
-              contentStyle={{ justifyContent: 'flex-start' }}
-              labelStyle={{ textAlign: 'left', width: '100%', color: colors.inverseSurface }}
-              onPress={() => {
-                drawer.current.closeDrawer();
-                navigation.navigate('MainApp');
-              }}
-            >
-              Dashboard
-            </Button>
-            <Button
-              contentStyle={{ justifyContent: 'flex-start' }}
-              labelStyle={{ textAlign: 'left', width: '100%', color: colors.inverseSurface }}
-              onPress={() => {
-                drawer.current.closeDrawer();
-                navigation.navigate('Anggaran');
-              }}
-            >
-              Anggaran
-            </Button>
-            <Button
-              contentStyle={{ justifyContent: 'flex-start' }}
-              labelStyle={{ textAlign: 'left', width: '100%', color: colors.inverseSurface }}
-              onPress={() => {
-                drawer.current.closeDrawer();
-                navigation.navigate('Report');
-              }}
-            >
-              Laporan
-            </Button>
-          </>
+          <DrawerItem 
+            label="Propose Budget" 
+            icon="add-chart" 
+            active={route.name === 'Anggaran'}
+            onPress={() => {
+              drawer.current.closeDrawer();
+              navigation.navigate('Anggaran');
+            }}
+          />
         )}
 
         {role === 'MITRA' && (
-          <>
-            <Button
-              contentStyle={{ justifyContent: 'flex-start' }}
-              labelStyle={{ textAlign: 'left', width: '100%', color: colors.inverseSurface }}
-              onPress={() => {
-                drawer.current.closeDrawer();
-                navigation.navigate('MainApp');
-              }}
-            >
-              Dashboard
-            </Button>
-            <Button
-              contentStyle={{ justifyContent: 'flex-start' }}
-              labelStyle={{ textAlign: 'left', width: '100%', color: colors.inverseSurface }}
-              onPress={() => {
-                drawer.current.closeDrawer();
-                navigation.navigate('BimbinganUKM');
-              }}
-            >
-              Bimbingan UKM
-            </Button>
-            <Button
-              contentStyle={{ justifyContent: 'flex-start' }}
-              labelStyle={{ textAlign: 'left', width: '100%', color: colors.inverseSurface }}
-              onPress={() => {
-                drawer.current.closeDrawer();
-                navigation.navigate('Report');
-              }}
-            >
-              Laporan
-            </Button>
-          </>
+          <DrawerItem 
+            label="Allocate Funding" 
+            icon="account-tree" 
+            active={route.name === 'BimbinganUKM'}
+            onPress={() => {
+              drawer.current.closeDrawer();
+              navigation.navigate('BimbinganUKM');
+            }}
+          />
         )}
 
         {role === 'UKM' && (
-          <>
-            <Button
-              contentStyle={{ justifyContent: 'flex-start' }}
-              labelStyle={{ textAlign: 'left', width: '100%', color: colors.inverseSurface }}
-              onPress={() => {
-                drawer.current.closeDrawer();
-                navigation.navigate('MainApp');
-              }}
-            >
-              Dashboard
-            </Button>
-            <Button
-              contentStyle={{ justifyContent: 'flex-start' }}
-              labelStyle={{ textAlign: 'left', width: '100%', color: colors.inverseSurface }}
-              onPress={() => {
-                drawer.current.closeDrawer();
-                navigation.navigate('ValidasiAnggaran');
-              }}
-            >
-              Validasi Anggaran
-            </Button>
-            <Button
-              contentStyle={{ justifyContent: 'flex-start' }}
-              labelStyle={{ textAlign: 'left', width: '100%', color: colors.inverseSurface }}
-              onPress={() => {
-                drawer.current.closeDrawer();
-                navigation.navigate('Report');
-              }}
-            >
-              Laporan
-            </Button>
-          </>
+          <DrawerItem 
+            label="Validate Receipt" 
+            icon="verified" 
+            active={route.name === 'ValidasiAnggaran'}
+            onPress={() => {
+              drawer.current.closeDrawer();
+              navigation.navigate('ValidasiAnggaran');
+            }}
+          />
         )}
+
+        <DrawerItem 
+          label="Analytics Report" 
+          icon="bar-chart" 
+          active={route.name === 'Report'}
+          onPress={() => {
+            drawer.current.closeDrawer();
+            navigation.navigate('Report');
+          }}
+        />
       </View>
-      
+
+      <View style={styles.footer}>
+        <Button 
+          icon="logout" 
+          mode="text" 
+          onPress={handleLogout}
+          textColor="#EF4444"
+          labelStyle={{ fontWeight: 'bold' }}
+        >
+          Sign Out
+        </Button>
+      </View>
     </View>
   );
 
   return (
     <DrawerLayout
       ref={drawer}
-      drawerWidth={280}
+      drawerWidth={300}
       drawerPosition="left"
       renderNavigationView={renderNavigationView}
     >
       <View style={[styles.container, {backgroundColor: colors.background}]}>
-        <Appbar.Header>
-          {/* Tombol Hamburger */}
+        <Appbar.Header style={{ backgroundColor: 'transparent', elevation: 0 }}>
           <IconButton
             icon="menu"
-            size={24}
+            iconColor={colors.primary}
+            size={28}
             onPress={() => drawer.current?.openDrawer()}
-            style={styles.hamburgerIcon}
           />
+          <Appbar.Content title="" />
           <IconButton 
-            icon="logout"
+            icon="bell-outline"
+            iconColor="#94A3B8"
             size={24} 
-            style={styles.logoutIcon} 
-            onPress={handleLogout}
+            onPress={() => {}}
           />
         </Appbar.Header>
-        <View style={styles.container}>
+        <View style={styles.content}>
           {route.name === 'MainApp' && (
             <Dashboard/>
           )}
@@ -202,59 +162,84 @@ export default function DrawerLayoutWrapper({ navigation, children }) {
   );
 }
 
+const DrawerItem = ({ label, icon, onPress, active }) => (
+  <Button
+    mode={active ? "contained" : "text"}
+    icon={({ color, size }) => <MaterialIcons name={icon} size={size} color={color} />}
+    onPress={onPress}
+    contentStyle={styles.drawerItemContent}
+    style={[styles.drawerItem, active && styles.activeItem]}
+    labelStyle={[styles.drawerItemLabel, { color: active ? '#0F172A' : '#94A3B8' }]}
+  >
+    {label}
+  </Button>
+);
+
 const styles = StyleSheet.create({
   drawerContent: {
     flex: 1,
-    padding: 20,
-    backgroundColor: '#2C2B2B',
+    backgroundColor: '#0F172A',
+    paddingTop: 50,
   },
-  container: {
-    padding: 20,
+  profileHeader: {
+    paddingHorizontal: 24,
+    marginBottom: 40,
+    alignItems: 'center',
   },
-  user: {
-    fontSize: 17,
-    fontWeight: 'bold',
-    marginTop: 10,
+  avatarContainer: {
+    marginBottom: 12,
   },
-  userInformation: {
-    borderTopRightRadius: 50,
-    borderTopLeftRadius: 50,
-    padding: 20,
-  },
-  userDetails: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  title: {
+  userName: {
+    color: '#F8FAFC',
     fontSize: 20,
     fontWeight: 'bold',
-    marginVertical: 20,
+  },
+  userRole: {
+    color: '#4CC9F0',
+    fontSize: 12,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+    marginTop: 4,
+  },
+  menuContainer: {
+    flex: 1,
+    paddingHorizontal: 12,
+  },
+  menuTitle: {
+    color: '#475569',
+    fontSize: 11,
+    fontWeight: '800',
+    letterSpacing: 1.5,
+    marginLeft: 16,
+    marginBottom: 16,
+  },
+  drawerItem: {
+    borderRadius: 12,
+    marginBottom: 4,
+  },
+  activeItem: {
+    backgroundColor: '#4CC9F0',
+  },
+  drawerItemContent: {
+    justifyContent: 'flex-start',
+    height: 48,
+  },
+  drawerItemLabel: {
+    fontSize: 15,
+    fontWeight: '600',
+    textAlign: 'left',
+    width: '100%',
+  },
+  footer: {
+    padding: 20,
+    borderTopWidth: 1,
+    borderTopColor: '#1E293B',
   },
   container: {
     flex: 1,
-    paddingHorizontal: 20,
   },
-  contentText: {
-    fontSize: 18,
-    marginTop: 100,
-    textAlign: 'center',
-  },
-  hamburgerIcon: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    zIndex: 1,
-  },
-  logoutIcon: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    zIndex: 1,
-  },
-  closeButtonContainer: {
-    alignItems: 'flex-end',
-  },
-  menu: {
-    justifyContent: 'flex-start'
+  content: {
+    flex: 1,
   }
 });

@@ -8,7 +8,6 @@ import { useEthereum } from '../../hooks/useWalletConnect';
 import { Dimensions } from "react-native";
 import AnggaranPieChart from "../components/report/AnggaranPieChart";
 import LineChartAnggaran from "../components/report/AnggaranLineChart";
-import { getPublicRpcProvider } from '../../utils/getPublicRpcProvider';
 import { ethers } from 'ethers';
 import AnggaranBantuanABI from '../../abis/AnggaranBantuanABI.json';
 import { pieChartAnggaran } from '../../utils/blockchain';
@@ -53,145 +52,185 @@ export default function Dashboard({ navigation }) {
   }, []);
 
   return (  
-    <ScrollView style={[styles.userInformation]}>
-      <Text variant="titleLarge" style={{ marginTop: 10, color: colors.inverseSurface }}>
-        Hi, {nama} !
-      </Text>
-      <Card style={{ marginTop: 20 }}>
+    <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
+      <View style={styles.header}>
+        <View>
+          <Text variant="headlineSmall" style={styles.welcomeText}>
+            Welcome back,
+          </Text>
+          <Text variant="headlineMedium" style={styles.nameText}>
+            {nama}
+          </Text>
+        </View>
+        <View style={styles.roleBadge}>
+          <Text style={styles.roleText}>{role}</Text>
+        </View>
+      </View>
+
+      <View style={styles.statsGrid}>
+        <View style={[styles.statTile, { backgroundColor: '#1E293B' }]}>
+          <MaterialIcons name="account-balance-wallet" size={24} color={colors.primary} />
+          <Text style={styles.statValue}>
+            {role === 'PEMERINTAH' ? (formattedStats?.belumDialokasikan || 0) : (formattedStats?.menungguValidasi || 0)}
+          </Text>
+          <Text style={styles.statLabel}>{role === 'PEMERINTAH' ? 'Unallocated' : 'Pending'}</Text>
+        </View>
+        <View style={[styles.statTile, { backgroundColor: '#1E293B' }]}>
+          <MaterialIcons name="verified" size={24} color="#10B981" />
+          <Text style={styles.statValue}>{formattedStats?.tervalidasi || formattedStats?.tervalidasi || 0}</Text>
+          <Text style={styles.statLabel}>Validated</Text>
+        </View>
+      </View>
+
+      <Text variant="titleMedium" style={styles.sectionTitle}>Analytics Overview</Text>
+      
+      <Card style={styles.mainCard}>
         <Card.Content style={{ alignItems: 'center' }}>
           {!formattedStats ? (
-            <Text style={{ textAlign: 'center' }}>Memuat data chart...</Text>
+            <Text style={{ color: '#94A3B8' }}>Syncing data...</Text>
           ) : (
             <AnggaranPieChart stats={formattedStats} />
           )}
-          {role == 'PEMERINTAH' &&
-            <>
-              <View style={styles.chartRow}>
-                <MaterialIcons name="fiber-manual-record" size={14} color="#ff7675" />
-                <Text style={styles.pieChartLabel}>Belum Dialokasi: {formattedStats?.belumDialokasikan ?? '-'}</Text>
-              </View>
-              <View style={styles.chartRow}>
-                <MaterialIcons name="fiber-manual-record" size={14} color="#ffeaa7" />
-                <Text style={styles.pieChartLabel}>Menunggu Validasi: {formattedStats?.menungguValidasi ?? '-'}</Text>
-              </View>
-              <View style={styles.chartRow}>
-                <MaterialIcons name="fiber-manual-record" size={14} color="#55efc4" />
-                <Text style={styles.pieChartLabel}>Tervalidasi: {formattedStats?.tervalidasi ?? '-'}</Text>
-              </View>
-            </>
-          }
-          {(role == 'MITRA' || role == 'UKM') &&
-            <>
-              <View style={styles.chartRow}>
-                <MaterialIcons name="fiber-manual-record" size={14} color="#ffeaa7" />
-                <Text style={styles.pieChartLabel}>Menunggu Validasi: {formattedStats?.menungguValidasi ?? '-'}</Text>
-              </View>
-              <View style={styles.chartRow}>
-                <MaterialIcons name="fiber-manual-record" size={14} color="#55efc4" />
-                <Text style={styles.pieChartLabel}>Tervalidasi: {formattedStats?.tervalidasi ?? '-'}</Text>
-              </View>
-            </>
-          }
+          
+          <View style={styles.legendContainer}>
+            {role == 'PEMERINTAH' &&
+              <>
+                <View style={styles.legendItem}>
+                  <View style={[styles.dot, { backgroundColor: '#F59E0B' }]} />
+                  <Text style={styles.legendText}>Unallocated</Text>
+                </View>
+                <View style={styles.legendItem}>
+                  <View style={[styles.dot, { backgroundColor: '#3B82F6' }]} />
+                  <Text style={styles.legendText}>Pending</Text>
+                </View>
+                <View style={styles.legendItem}>
+                  <View style={[styles.dot, { backgroundColor: '#10B981' }]} />
+                  <Text style={styles.legendText}>Validated</Text>
+                </View>
+              </>
+            }
+            {(role == 'MITRA' || role == 'UKM') &&
+              <>
+                <View style={styles.legendItem}>
+                  <View style={[styles.dot, { backgroundColor: '#3B82F6' }]} />
+                  <Text style={styles.legendText}>Pending</Text>
+                </View>
+                <View style={styles.legendItem}>
+                  <View style={[styles.dot, { backgroundColor: '#10B981' }]} />
+                  <Text style={styles.legendText}>Validated</Text>
+                </View>
+              </>
+            }
+          </View>
         </Card.Content>
       </Card>
 
-      <View style={{ padding: 16 }}>
-        <LineChartAnggaran />
+      <View style={{ marginTop: 24, marginBottom: 40 }}>
+        <Text variant="titleMedium" style={styles.sectionTitle}>
+          Funding Activity Trend
+        </Text>
+        <Card style={styles.mainCard}>
+          <Card.Content>
+            <LineChartAnggaran />
+          </Card.Content>
+        </Card>
       </View>
-
-      {/* <View style={{ padding: 16 }}>
-        <LineChartAnggaran />
-      </View> */}
-
-      {/* <Text variant="titleLarge" style={{ marginVertical: 20, color: colors.inverseSurface }}>
-        Your Details
-      </Text>
-      <View style={styles.userDetails}>
-        <View style={styles.userDetailsLabel}>
-          <MaterialIcons name="fingerprint" size={20} color="#fff"/>
-          <Text style={styles.labelText}>Kode</Text>
-        </View>
-        <Text style={styles.valueText}>{kode}</Text>
-      </View>
-      <View style={styles.userDetails}>
-        <View style={styles.userDetailsLabel}>
-          <MaterialIcons name="person" size={20} color="#fff"/>
-          <Text style={styles.labelText}>Nama</Text>
-        </View>
-        <Text style={styles.valueText}>{nama}</Text>
-      </View>
-      <View style={styles.userDetails}>
-        <View style={styles.userDetailsLabel}>
-          <MaterialIcons name="verified-user" size={20} color="#fff"/>
-          <Text style={styles.labelText}>Role</Text>
-        </View>
-        <Text style={styles.valueText}>{isReadable(role)}</Text>
-      </View>
-      <View style={styles.userDetails}>
-        <View style={styles.userDetailsLabel}>
-          <MaterialIcons name="phone" size={20} color="#fff" />
-          <Text style={styles.labelText}>Kontak</Text>
-        </View>
-        <Text style={styles.valueText}>081292277031</Text>
-      </View> */}
-
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  pieChartContainer: {
+  container: {
     flex: 1,
-    justifyContent: 'space-between',
+    paddingHorizontal: 20,
   },
-  chartRow: {
+  header: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginRight: 8,
-    marginVertical: 4,
+    marginTop: 30,
+    marginBottom: 24,
   },
-  pieChartLabel: {
-    color: '#fff',
-    marginLeft: 5,
+  welcomeText: {
+    color: '#94A3B8',
+    fontSize: 16,
   },
-  user: {
-    fontSize: 17,
+  nameText: {
+    color: '#F8FAFC',
+    fontWeight: '800',
+    letterSpacing: -0.5,
+  },
+  roleBadge: {
+    backgroundColor: 'rgba(76, 201, 240, 0.15)',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: 'rgba(76, 201, 240, 0.3)',
+  },
+  roleText: {
+    color: '#4CC9F0',
+    fontSize: 12,
     fontWeight: 'bold',
+    textTransform: 'uppercase',
+  },
+  statsGrid: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 24,
+  },
+  statTile: {
+    width: '48%',
+    padding: 16,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#334155',
+  },
+  statValue: {
+    color: '#F8FAFC',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginTop: 8,
+  },
+  statLabel: {
+    color: '#94A3B8',
+    fontSize: 12,
+    marginTop: 2,
+  },
+  sectionTitle: {
+    color: '#F8FAFC',
+    marginBottom: 12,
+    fontWeight: '700',
+    fontSize: 18,
+  },
+  mainCard: {
+    backgroundColor: '#1E293B',
+    borderRadius: 24,
+    borderWidth: 1,
+    borderColor: '#334155',
+    elevation: 0,
+  },
+  legendContainer: {
     marginTop: 10,
-  },
-  userInformation: {
-    borderTopRightRadius: 50,
-    borderTopLeftRadius: 50,
-  },
-  userDetails: {
+    width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginVertical: 10,
-    padding: 10,
-    backgroundColor: '#454545', 
-    borderRadius: 10,
-    borderWidth: 2, 
-    borderColor: '#A8A8A8',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
   },
-
-  userDetailsLabel: {
+  legendItem: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginHorizontal: 10,
+    marginVertical: 5,
   },
-
-  labelText: {
-    marginLeft: 8,
-    color: '#fff',
+  dot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginRight: 6,
   },
-
-  valueText: {
-    color: '#fff',
+  legendText: {
+    color: '#94A3B8',
+    fontSize: 12,
   },
-
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginVertical: 20,
-  }
 });

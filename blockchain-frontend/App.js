@@ -39,6 +39,21 @@ LogBox.ignoreLogs([
 if (typeof global.atob === 'undefined') global.atob = atob;
 if (typeof global.btoa === 'undefined') global.btoa = btoa;
 
+const AcademicTheme = {
+  ...MD3DarkTheme,
+  colors: {
+    ...MD3DarkTheme.colors,
+    primary: '#4CC9F0', // Bright Cyan for actions
+    secondary: '#4895EF', // Professional Blue
+    tertiary: '#4361EE', // Deep Tech Blue
+    background: '#0F172A', // Slate Dark Background (Modern Blockchain feel)
+    surface: '#1E293B', // Lighter Slate for Cards
+    onSurface: '#F8FAFC',
+    outline: '#334155',
+    error: '#EF4444',
+  },
+};
+
 export default Sentry.wrap(function App() {
 
   useEffect(() => {
@@ -51,11 +66,11 @@ export default Sentry.wrap(function App() {
       }
     };
     clearStaleWalletSession();
-  })
+  }, []); // Added empty dependency array
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <PaperProvider theme={MD3DarkTheme}>
+      <PaperProvider theme={AcademicTheme}>
         <SafeAreaProvider>
           <AppNavigator />
           <WalletConnectModal

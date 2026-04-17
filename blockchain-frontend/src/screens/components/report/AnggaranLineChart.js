@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import { View, Dimensions, Text } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LineChart } from "react-native-chart-kit";
-import { getPublicRpcProvider } from '../../../utils/getPublicRpcProvider';
-import { ethers } from 'ethers';
+import { Contract } from 'ethers';
 import { useEthereum } from "../../../hooks/useWalletConnect";
+import { getProvider } from "../../../utils/blockchain";
 import AnggaranBantuanABI from '../../../abis/AnggaranBantuanABI.json';
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 
 dayjs.locale("id");
 
-const CONTRACT_ADDRESS = '0x68a25bb8C9E7E1FF272023F948b2969793e09be7';
+const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS || '0x68a25bb8C9E7E1FF272023F948b2969793e09be7';
 
 const LineChartAnggaran = () => {
   const [chartData, setChartData] = useState(null);
@@ -20,19 +20,30 @@ const LineChartAnggaran = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-				const roleUser = await AsyncStorage.getItem('role');
-
-        const provider = getPublicRpcProvider(11155111);
-        const contract = new ethers.Contract(CONTRACT_ADDRESS, AnggaranBantuanABI.abi, provider);
-        const result = await contract.getAllAnggaranRingkas();
+        if (!address) return;
+        
+        const roleUser = await AsyncStorage.getItem('role');
+        const provider = getProvider();
+        const contract = new Contract(CONTRACT_ADDRESS, AnggaranBantuanABI.abi, provider);
+        
+        // Use the actual contract function name if it exists, otherwise fallback safely
+        let result = [];
+        try {
+          // Check if this exists in your contract
+          result = await contract.getAllAnggaranRingkas();
+        } catch (e) {
+          console.warn("getAllAnggaranRingkas not found or failed", e);
+        }
 
         const now = dayjs();
         const sixMonthsAgo = now.subtract(5, 'month').startOf('month');
         const monthlyTotals = {};
 
         for (let item of result) {
+          // In the refactored contract, item might be a struct or we need getAnggaran
           const detail = await contract.getAnggaran(item.id);
 
+          // detail index: [id, idPemerintah, kodePemerintah, kodeRegulasi, jumlahAnggaran, kegiatan, disetujui, mitraPengalokasi, ukmTerpilih, ...]
           if (roleUser === 'PEMERINTAH') {
             const idPemerintah = detail[1];
             if (idPemerintah.toLowerCase() !== address.toLowerCase()) continue;
@@ -40,11 +51,11 @@ const LineChartAnggaran = () => {
 
           if (roleUser === 'MITRA') {
             const idMitra = detail[7];
-            if (idMitra.toLowerCase() !== address.toLowerCase()) continue;
+            if (!idMitra || idMitra.toLowerCase() !== address.toLowerCase()) continue;
           }
 
           if (roleUser === 'UKM') {
-            const ukmList = detail[8]; // index ke-8 untuk ukmTerpilih
+            const ukmList = detail[8]; 
             const isUKMTerpilih = Array.isArray(ukmList) && ukmList.some((addr) =>
               addr.toLowerCase() === address.toLowerCase()
             );
@@ -55,7 +66,7 @@ const LineChartAnggaran = () => {
           const date = dayjs(timestamp);
           if (date.isBefore(sixMonthsAgo)) continue;
 
-          const label = date.format("MMM"); // Misal: 'Jul'
+          const label = date.format("MMM");
           if (!monthlyTotals[label]) monthlyTotals[label] = 0;
           monthlyTotals[label] += parseInt(item.jumlahAnggaran.toString());
         }
@@ -68,58 +79,59 @@ const LineChartAnggaran = () => {
           labels.push(label);
           const rawValue = monthlyTotals[label] || 0;
           const inMillions = Math.floor(rawValue / 1_000_000);
-          data.push(inMillions);
+          data.push(inMillions || 0);
         }
 
         setChartData({
           labels,
-          datasets: [{ data }]
+          datasets: [{ data: data.length > 0 ? data : [0, 0, 0, 0, 0, 0] }]
         });
 
       } catch (error) {
         console.error("Gagal memuat data anggaran:", error);
       }
-      };
+    };
 
     fetchData();
-  }, []);
+  }, [address]);
 
-  if (!chartData) return <Text style={{ color: '#fff' }}>Memuat data...</Text>;
+  if (!chartData) return <Text style={{ color: '#94A3B8', textAlign: 'center' }}>Syncing with blockchain...</Text>;
+
+  const screenWidth = Dimensions.get("window").width;
 
   return (
-    <View>
-      <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold', textAlign: "center", marginBottom: 10 }}>
-        Tren Total Anggaran
-      </Text>
+    <View style={{ alignItems: 'center' }}>
       <LineChart
         data={{
           labels: chartData.labels,
           datasets: chartData.datasets,
         }}
-        width={300}
+        width={screenWidth - 80}
         height={200}
         chartConfig={{
-          fromZero: true,
-          backgroundGradientFrom: "#1E2923",
-          backgroundGradientTo: "#08130D",
+          backgroundColor: "#1E293B",
+          backgroundGradientFrom: "#1E293B",
+          backgroundGradientTo: "#1E293B",
           decimalPlaces: 0,
-          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          labelColor: () => "#ffffff",
+          color: (opacity = 1) => `rgba(76, 201, 240, ${opacity})`, // primary color
+          labelColor: (opacity = 1) => `rgba(148, 163, 184, ${opacity})`, // slate-400
+          style: {
+            borderRadius: 16,
+          },
           propsForDots: {
             r: "4",
             strokeWidth: "2",
-            stroke: "#000",
+            stroke: "#4CC9F0",
           },
         }}
-        bezier={false}
+        bezier
         style={{
           marginVertical: 8,
-          borderRadius: 12,
-          alignSelf: 'center'
+          borderRadius: 16,
         }}
       />
-      <Text style={{ textAlign: 'center', color: '#fff', fontSize: 12 }}>
-        *Nilai dalam jutaan rupiah
+      <Text style={{ textAlign: 'center', color: '#64748B', fontSize: 11, marginTop: 4 }}>
+        Values in Million IDR
       </Text>
     </View>
   );

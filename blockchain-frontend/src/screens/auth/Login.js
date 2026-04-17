@@ -60,28 +60,36 @@ export default function Login({ navigation }) {
           source={require('../../../assets/lottie/login.json')}
           autoPlay
           loop
-          style={{ width: 200, height: 200, marginBottom: 10 }}
+          style={{ width: 220, height: 220, marginBottom: 10 }}
         />
         <Text 
-          variant="titleLarge"
-          style={{marginBottom: 20, textAlign: 'center', color: colors.inverseSurface}}
+          variant="headlineMedium"
+          style={{marginBottom: 10, textAlign: 'center', color: colors.primary, fontWeight: 'bold'}}
         >
-          Log In Bantuan UKM App
+          EduChain Bantuan
+        </Text>
+        <Text 
+          variant="bodyMedium"
+          style={{marginBottom: 20, textAlign: 'center', color: '#94A3B8'}}
+        >
+          Secure Blockchain Ecosystem for Academic Funding
         </Text>
       </View>
 
       <View style={styles.bottomContent}>
         <TextInput
-          label="Kode"
+          label="User ID"
           value={kode}
-          style={{ color: colors.text }}
+          mode="outlined"
+          style={styles.input}
           disabled
         />
 
         <TextInput
-          label="Nama"
+          label="Nama Lengkap"
           value={nama}
-          style={{ color: colors.text }}
+          mode="outlined"
+          style={styles.input}
           disabled
         />
 
@@ -89,12 +97,18 @@ export default function Login({ navigation }) {
           mode="contained"
           onPress={handleLogin}
           disabled={loading}
-          style={{ marginTop: 20 }}
+          style={styles.loginButton}
+          labelStyle={{ fontWeight: 'bold', fontSize: 16 }}
         >
-          Log In
+          Log In to Dashboard
         </Button>
 
-        <Text style={{marginTop: 10, color: colors.inverseSurface}}>Don't have an account? <Text onPress={handleRegister} style={{color: 'lightblue'}}>Register</Text></Text>
+        <Text style={{marginTop: 20, textAlign: 'center', color: '#94A3B8'}}>
+          Don't have an account? {' '}
+          <Text onPress={handleRegister} style={{color: colors.primary, fontWeight: 'bold'}}>
+            Register Now
+          </Text>
+        </Text>
       </View>
     </View>
   );
@@ -105,38 +119,21 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
     justifyContent: 'center',
-		alignContent: 'center',
   },
   topContent: {
     alignItems: 'center',
-    marginTop: 40,
+    marginBottom: 20,
   },
   bottomContent: {
-    marginTop: 24,
-    paddingHorizontal: 24,
-  },
-  title: {
-    marginBottom: 24,
-    textAlign: 'center',
-  },
-  label: {
-    marginTop: 16,
-    marginBottom: 8,
-    fontWeight: 'bold',
-  },
-  roleRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  roleButton: {
-    flex: 1,
-    marginHorizontal: 4,
+    paddingHorizontal: 10,
   },
   input: {
-    marginTop: 8,
-    marginBottom: 8,
+    marginBottom: 16,
+    backgroundColor: '#1E293B',
   },
   loginButton: {
-    marginTop: 16,
+    marginTop: 10,
+    paddingVertical: 8,
+    borderRadius: 12,
   },
 });

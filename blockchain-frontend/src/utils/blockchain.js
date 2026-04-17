@@ -1,39 +1,69 @@
-import { Web3Provider } from '@ethersproject/providers';
+import { ethers, Contract } from 'ethers';
 import contractABI from '../abis/AnggaranBantuanABI.json';
-import { getPublicRpcProvider } from './getPublicRpcProvider';
-import { Contract, Signer, ethers } from 'ethers';
 
-const contractAddress = '0x68a25bb8C9E7E1FF272023F948b2969793e09be7'; 
+// Use environment variables or fallback to constants
+const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS || '0x68a25bb8C9E7E1FF272023F948b2969793e09be7';
+const RPC_URL = process.env.RPC_URL || 'https://sepolia.infura.io/v3/847d18875da64f2c8eb298d41b1ee414';
 
+// Chain ID for Sepolia
+const SEPOLIA_CHAIN_ID = 11155111;
+
+/**
+ * Helper to get a public JSON-RPC provider.
+ */
+export const getProvider = () => {
+  return new ethers.JsonRpcProvider(RPC_URL);
+};
+
+/**
+ * Helper to decode bytes32 to string.
+ */
 const safeDecode = (val) => {
   try {
+    if (!val || val === ethers.ZeroHash) return '';
     return ethers.decodeBytes32String(val);
-  } catch {
-    return val; // fallback if not decodable
+  } catch (err) {
+    console.warn('Failed to decode bytes32:', val, err);
+    return val; // Fallback
   }
 };
 
+/**
+ * Get user details from contract.
+ */
 export const getUserDetails = async (address) => {
-  const provider = getPublicRpcProvider(11155111);
-  const contract = new Contract(contractAddress, contractABI.abi, provider);
-  const userData = await contract.users(address);
+  try {
+    const provider = getProvider();
+    const contract = new Contract(CONTRACT_ADDRESS, contractABI.abi, provider);
+    const userData = await contract.users(address);
 
-  const role = typeof userData.role === 'string' ? userData.role : safeDecode(userData.role);
-  const kode = safeDecode(userData.kode);
-  const nama = safeDecode(userData.nama);
+    if (!userData || userData.kode === ethers.ZeroHash) {
+      return [null, null, null, null];
+    }
 
-  return [role, kode, nama, userData.kontak];
+    const role = userData.role;
+    const kode = safeDecode(userData.kode);
+    const nama = safeDecode(userData.nama);
+    const kontak = userData.kontak;
+
+    return [role, kode, nama, kontak];
+  } catch (err) {
+    console.error('Error in getUserDetails:', err);
+    throw err;
+  }
 };
 
-
+/**
+ * Register a new user.
+ */
 export const registerUser = async (signer, roleText, kode, nama, kontak) => {
-  if (!roleText || !kode) {
-    throw new Error('Kode dan role wajib diisi untuk registrasi');
+  if (!roleText || !kode || !nama) {
+    throw new Error('Kode, nama, dan role wajib diisi untuk registrasi');
   }
 
   try {
-    const contract = new ethers.Contract(contractAddress, contractABI.abi, signer);
-
+    const contract = new Contract(CONTRACT_ADDRESS, contractABI.abi, signer);
+    
     const tx = await contract.registerUser(
       ethers.encodeBytes32String(kode),
       roleText.toUpperCase(),
@@ -41,8 +71,7 @@ export const registerUser = async (signer, roleText, kode, nama, kontak) => {
       kontak
     );
 
-    console.log('Transaksi dikirim! Hash:', tx.hash);
-
+    console.log('Registration tx sent:', tx.hash);
     return tx.hash;
   } catch (err) {
     console.error('Gagal registrasi user:', err);
@@ -50,231 +79,223 @@ export const registerUser = async (signer, roleText, kode, nama, kontak) => {
   }
 };
 
-
+/**
+ * Submit a new budget proposal (Pemerintah only).
+ */
 export const ajukanAnggaran = async (signer, kodeRegulasi, jumlahAnggaran) => {
   if (!kodeRegulasi || !jumlahAnggaran) {
     throw new Error('Semua field wajib diisi untuk ajukanAnggaran');
   }
 
   try {
-    console.log('Memulai ajukanAnggaran...');
-    const contract = new Contract(contractAddress, contractABI.abi, signer);
-    const address = await signer.getAddress();
-
-    console.log('Jumlah anggaran:', jumlahAnggaran);
-
-    const encodedData = contract.interface.encodeFunctionData('ajukanAnggaran', [
+    const contract = new Contract(CONTRACT_ADDRESS, contractABI.abi, signer);
+    
+    const tx = await contract.ajukanAnggaran(
       ethers.encodeBytes32String(kodeRegulasi),
-      jumlahAnggaran.toString(),
-    ]);
+      ethers.parseUnits(jumlahAnggaran.toString(), 0) // Assuming no decimals for simplicity
+    );
 
-    const txParams = {
-      from: address,
-      to: contractAddress,
-      data: encodedData,
-    };
-
-    console.log('Mengirim transaksi melalui provider...');
-    const txHash = await signer.provider.send('eth_sendTransaction', [txParams]);
-    console.log('Transaksi berhasil dikirim:', txHash);
-
-    return txHash;
+    console.log('Ajukan anggaran tx sent:', tx.hash);
+    return tx.hash;
   } catch (err) {
     console.error('Gagal ajukan anggaran:', err);
     throw err;
   }
 };
 
-
+/**
+ * Get budgets that haven't been allocated yet.
+ */
 export const getAnggaranBelumDialokasikan = async () => {
-  const provider = getPublicRpcProvider(11155111);
-  const contract = new ethers.Contract(contractAddress, contractABI.abi, provider);
-  const ids = await contract.getAnggaranBelumDialokasikan();
+  try {
+    const provider = getProvider();
+    const contract = new Contract(CONTRACT_ADDRESS, contractABI.abi, provider);
+    const ids = await contract.getAnggaranBelumDialokasikan();
 
-  const parsedIds = ids.map(id => ({
-    label: `Anggaran #${id.toString()}`,
-    value: id.toString()
-  }));
+    return ids.map(id => ({
+      label: `Anggaran #${id.toString()}`,
+      value: id.toString()
+    }));
+  } catch (err) {
+    console.error('Error in getAnggaranBelumDialokasikan:', err);
+    return [];
+  }
+};
 
-  return parsedIds;
-}
-
+/**
+ * Get all UKM users.
+ */
 export const getAllUkm = async () => {
-  const provider = getPublicRpcProvider(11155111);
-  const contract = new ethers.Contract(contractAddress, contractABI.abi, provider);
-  const [addresses, codes, names] = await contract.getAllUKMWithData();
+  try {
+    const provider = getProvider();
+    const contract = new Contract(CONTRACT_ADDRESS, contractABI.abi, provider);
+    const [addresses, codes, names] = await contract.getAllUKMWithData();
 
-  const kode = codes.map(safeDecode);
-  const nama = names.map(safeDecode);
-  
-  const formatted = addresses.map((addr, i) => ({
-    label: `${nama[i]} (${kode[i]})`,
-    value: addr,
-  }));
+    return addresses.map((addr, i) => ({
+      label: `${safeDecode(names[i])} (${safeDecode(codes[i])})`,
+      value: addr,
+    }));
+  } catch (err) {
+    console.error('Error in getAllUkm:', err);
+    return [];
+  }
+};
 
-  return formatted;
-}
-
+/**
+ * Get budget info by ID.
+ */
 export const getInfoAnggaran = async (id) => {
-  const provider = getPublicRpcProvider(11155111);
-  const contract = new ethers.Contract(contractAddress, contractABI.abi, provider);
-  const [kode, kodeRegulasi, jumlahAnggaran] = await contract.getInfoAnggaran(id);
-  const anggaranNumber = Number(jumlahAnggaran.toString());
-  const formatted = new Intl.NumberFormat("id-ID").format(anggaranNumber);
+  try {
+    const provider = getProvider();
+    const contract = new Contract(CONTRACT_ADDRESS, contractABI.abi, provider);
+    const [kodePemerintahRaw, kodeRegulasiRaw, jumlahAnggaran] = await contract.getInfoAnggaran(id);
+    
+    const formatted = new Intl.NumberFormat("id-ID").format(jumlahAnggaran);
 
-  const kodePemerintah = safeDecode(kode);
-  const kodeReg = safeDecode(kodeRegulasi);
+    return [
+      safeDecode(kodePemerintahRaw),
+      safeDecode(kodeRegulasiRaw),
+      formatted,
+      jumlahAnggaran.toString(),
+    ];
+  } catch (err) {
+    console.error('Error in getInfoAnggaran:', err);
+    throw err;
+  }
+};
 
-  const result = [
-    kodePemerintah,
-    kodeReg,
-    formatted,
-    jumlahAnggaran,
-  ]
-
-  return result;
-}
-
+/**
+ * Allocate budget to UKMs (Mitra only).
+ */
 export const alokasikanAnggaran = async (signer, id, kegiatan, ukmAddresses, anggaranUkm) => {
-  if (!id || !Array.isArray(ukmAddresses) || ukmAddresses.length === 0 || ukmAddresses.length > 3) {
-    throw new Error('ID dan 1-3 alamat UKM wajib diisi');
+  if (!id || !ukmAddresses || ukmAddresses.length === 0) {
+    throw new Error('ID dan setidaknya satu alamat UKM wajib diisi');
   }
 
   try {
-    console.log('Memulai alokasikanAnggaran...');
-    const contract = new Contract(contractAddress, contractABI.abi, signer);
-    const address = await signer.getAddress();
-
-    const encodedData = contract.interface.encodeFunctionData('alokasikanAnggaran', [
+    const contract = new Contract(CONTRACT_ADDRESS, contractABI.abi, signer);
+    
+    const tx = await contract.alokasikanAnggaran(
       id,
       ethers.encodeBytes32String(kegiatan),
       ukmAddresses,
-      anggaranUkm,
-    ]);
+      anggaranUkm.map(a => ethers.parseUnits(a.toString(), 0))
+    );
 
-    const txParams = {
-      from: address,
-      to: contractAddress,
-      data: encodedData,
-    };
-
-    const txHash = await signer.provider.send('eth_sendTransaction', [txParams]);
-    console.log('Transaksi berhasil dikirim:', txHash);
-
-    return txHash;
+    console.log('Alokasi anggaran tx sent:', tx.hash);
+    return tx.hash;
   } catch (err) {
     console.error('Gagal alokasikan anggaran:', err);
     throw err;
   }
 };
 
-
+/**
+ * Get budgets assigned to a specific UKM.
+ */
 export const getAnggaranUntukUKM = async (address) => {
-  const provider = getPublicRpcProvider(11155111);
-  const contract = new ethers.Contract(contractAddress, contractABI.abi, provider);
-  const data = await contract.getAnggaranUntukUKM(address);
-
-  const parsedIds = data.map(anggaran => ({
-    label: `Anggaran #${anggaran.id.toString()}`,
-    value: anggaran.id.toString()
-  }));
-
-  return parsedIds;
-}
-
-export const getAnggaranUntukUKMById = async (id, address) => {
-  const provider = getPublicRpcProvider(11155111);
-  const contract = new ethers.Contract(contractAddress, contractABI.abi, provider);
-  const [idAnggaran, idPemerintah, kode, kodeRegulasi, jumlahAnggaran, kegiatan, disetujui, mitraPengalokasi, ukmTerpilih, jumlahValidasi, semuaUKMSudahValidasi] = await contract.getAnggaran(id);
-  const data = await contract.getAnggaranUntukUKMById(id, address);
-  const anggaranNumber = Number(jumlahAnggaran.toString());
-  const anggaranUKMNumber = Number(data[0][3].toString());
-  const formatted = new Intl.NumberFormat("id-ID").format(anggaranNumber);
-  const formattedAnggaran = new Intl.NumberFormat("id-ID").format(anggaranUKMNumber);
-  
-  const [roleUser, kodeUser, namaUser, kontakUser]  = await getUserDetails(mitraPengalokasi);
-
-  const kodePemerintah = safeDecode(kode);
-  const kodeReg = safeDecode(kodeRegulasi);
-  const kegiatanText = safeDecode(kegiatan);
-
-  const result = [
-    kodePemerintah,
-    kodeReg,
-    formatted,
-    jumlahAnggaran,
-    kegiatanText,
-    kodeUser,
-    formattedAnggaran,
-  ];
-
-  return result;
-}
-
-
-export const validasiDana = async (signer, id) => {
-  if (!id) {
-    throw new Error('ID wajib diisi');
-  }
-
   try {
-    console.log('Memulai validasDana...');
-    const contract = new Contract(contractAddress, contractABI.abi, signer);
-    const address = await signer.getAddress();
+    const provider = getProvider();
+    const contract = new Contract(CONTRACT_ADDRESS, contractABI.abi, provider);
+    const data = await contract.getAnggaranUntukUKM(address);
 
-    const encodedData = contract.interface.encodeFunctionData('validasiDana', [
-      id,
-    ]);
-
-    const txParams = {
-      from: address,
-      to: contractAddress,
-      data: encodedData,
-    };
-
-    const txHash = await signer.provider.send('eth_sendTransaction', [txParams]);
-    console.log('Transaksi berhasil dikirim:', txHash);
-
-    return txHash;
+    return data.map(item => ({
+      label: `Anggaran #${item.id.toString()}`,
+      value: item.id.toString()
+    }));
   } catch (err) {
-    console.error('Gagal alokasikan anggaran:', err);
+    console.error('Error in getAnggaranUntukUKM:', err);
+    return [];
+  }
+};
+
+/**
+ * Get detailed budget info for a specific UKM.
+ */
+export const getAnggaranUntukUKMById = async (id, address) => {
+  try {
+    const provider = getProvider();
+    const contract = new Contract(CONTRACT_ADDRESS, contractABI.abi, provider);
+    const budgetData = await contract.getAnggaran(id);
+    const ukmBudgetData = await contract.getAnggaranUntukUKMById(id, address);
+    
+    // Extract data from getAnggaran return values
+    // id, idPemerintah, kodePemerintah, kodeRegulasi, jumlahAnggaran, kegiatan, disetujui, mitraPengalokasi, ukmTerpilih, jumlahValidasi, semuaUKMSudahValidasi
+    const [,,,, totalAnggaran, kegiatan, , mitraPengalokasi] = budgetData;
+    
+    // Extract data from getAnggaranUntukUKMById return values
+    const [ukmItem] = ukmBudgetData;
+    const alokasiUKM = ukmItem.alokasi;
+
+    const [roleMitra, kodeMitra] = await getUserDetails(mitraPengalokasi);
+
+    return [
+      safeDecode(budgetData[2]), // kodePemerintah
+      safeDecode(budgetData[3]), // kodeRegulasi
+      new Intl.NumberFormat("id-ID").format(totalAnggaran),
+      totalAnggaran.toString(),
+      safeDecode(kegiatan),
+      kodeMitra,
+      new Intl.NumberFormat("id-ID").format(alokasiUKM),
+    ];
+  } catch (err) {
+    console.error('Error in getAnggaranUntukUKMById:', err);
     throw err;
   }
 };
 
+/**
+ * Validate received budget (UKM only).
+ */
+export const validasiDana = async (signer, id) => {
+  try {
+    const contract = new Contract(CONTRACT_ADDRESS, contractABI.abi, signer);
+    const tx = await contract.validasiDana(id);
 
+    console.log('Validasi dana tx sent:', tx.hash);
+    return tx.hash;
+  } catch (err) {
+    console.error('Gagal validasi dana:', err);
+    throw err;
+  }
+};
+
+/**
+ * Get statistics for charts.
+ */
 export const pieChartAnggaran = async (role, address) => {
-  const provider = getPublicRpcProvider(11155111);
-  const contract = new ethers.Contract(contractAddress, contractABI.abi, provider);
+  try {
+    const provider = getProvider();
+    const contract = new Contract(CONTRACT_ADDRESS, contractABI.abi, provider);
 
-  let result;
+    if (role === 'PEMERINTAH') {
+      const stats = await contract.getStatistikAnggaran();
+      return {
+        belumDialokasikan: Number(stats[0]),
+        menungguValidasi: Number(stats[1]),
+        tervalidasi: Number(stats[2]),
+      };
+    }
 
-  if (role == 'PEMERINTAH') {
-    stats = await contract.getStatistikAnggaran();
-    console.log('stats dari blockchain ', stats);
-    
-    result = {
-      belumDialokasikan: Number(stats[0]),
-      menungguValidasi: Number(stats[1]),
-      tervalidasi: Number(stats[2]),
-    };
+    if (role === 'MITRA') {
+      const stats = await contract.getJumlahTransaksiAlokasiMitra(address);
+      return {
+        menungguValidasi: Number(stats[0]),
+        tervalidasi: Number(stats[1]),
+      };
+    }
+
+    if (role === 'UKM') {
+      const stats = await contract.getStatistikAnggaranUntukUKM(address);
+      return {
+        menungguValidasi: Number(stats[0]),
+        tervalidasi: Number(stats[1]),
+      };
+    }
+
+    return null;
+  } catch (err) {
+    console.error('Error in pieChartAnggaran:', err);
+    return null;
   }
-
-  if (role == 'MITRA') {
-    stats = await contract.getJumlahTransaksiAlokasiMitra(address);
-    result = {
-      menungguValidasi: Number(stats[0]),
-      tervalidasi: Number(stats[1]),
-    };
-  }
-
-  if (role == 'UKM') {
-    stats = await contract.getStatistikAnggaranUntukUKM(address);
-    result = {
-      menungguValidasi: Number(stats[0]),
-      tervalidasi: Number(stats[1]),
-    };
-  }
-
-  return result;
-}
+};
