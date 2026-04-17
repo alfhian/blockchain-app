@@ -1,0 +1,556 @@
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:376:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::vector<bool>::reference' (aka '__bit_reference<vector<bool, allocator<bool>>>') for 1st argument
+C/C++: inline dynamic::dynamic(std::vector<bool>::reference b)
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:378:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'VectorBoolConstRefCtorType' (aka 'std::__bit_const_reference<std::vector<bool>>') for 1st argument
+C/C++: inline dynamic::dynamic(VectorBoolConstRefCtorType b)
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:340:17: note: candidate template ignored: requirement 'is_detected_v<folly::dynamic_detail::detect_construct_string, folly::Formatter<false, const float &>>' was not satisfied [with Stringish = Formatter<false, const float &>]
+C/C++: inline dynamic::dynamic(Stringish&& s) : type_(STRING) {
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:384:10: note: candidate template ignored: substitution failure [with T = Formatter<false, const float &>]: implicit instantiation of undefined template 'folly::dynamic::NumericTypeHelper<folly::Formatter<false, const float &>>'
+C/C++: dynamic::dynamic(T t) {
+C/C++:          ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:1115:12: note: explicit constructor is not a candidate
+C/C++:   explicit dynamic(Array&& r);
+C/C++:            ^
+C/C++: 2 errors generated.
+C/C++: C:\Users\ASUS\AppData\Local\Android\Sdk\ndk\26.3.11579264\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android24 --sysroot=C:/Users/ASUS/AppData/Local/Android/Sdk/ndk/26.3.11579264/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DRN_SERIALIZABLE_STATE -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-community/netinfo/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-community/netinfo/android/build/generated/source/codegen/jni/react/renderer/components/RNCNetInfoSpec -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/83198c47a1c402754cadaa99718025d1/transformed/fbjni-0.7.0/prefab/modules/fbjni/include -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/jsi/include -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -Wall -Werror -fexceptions -frtti -std=c++20 -DFOLLY_NO_CONFIG=1 -DLOG_TAG=\"ReactNative\" -DFOLLY_HAVE_CLOCK_GETTIME=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_CFG_NO_COROUTINES=1 -DFOLLY_MOBILE=1 -DFOLLY_HAVE_RECVMMSG=1 -DFOLLY_HAVE_PTHREAD=1 -DFOLLY_HAVE_XSI_STRERROR_R=1 -MD -MT RNCNetInfoSpec_autolinked_build/CMakeFiles/react_codegen_RNCNetInfoSpec.dir/react/renderer/components/RNCNetInfoSpec/Props.cpp.o -MF RNCNetInfoSpec_autolinked_build\CMakeFiles\react_codegen_RNCNetInfoSpec.dir\react\renderer\components\RNCNetInfoSpec\Props.cpp.o.d -o RNCNetInfoSpec_autolinked_build/CMakeFiles/react_codegen_RNCNetInfoSpec.dir/react/renderer/components/RNCNetInfoSpec/Props.cpp.o -c C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-community/netinfo/android/build/generated/source/codegen/jni/react/renderer/components/RNCNetInfoSpec/Props.cpp
+C/C++: In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-community/netinfo/android/build/generated/source/codegen/jni/react/renderer/components/RNCNetInfoSpec/Props.cpp:13:
+C/C++: In file included from C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/propsConversions.h:15:
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/graphicsConversions.h:71:14: error: no member named 'format' in namespace 'std'; did you mean 'folly::format'?
+C/C++:       return std::format("{}%", dimension.value);
+C/C++:              ^~~~~
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/Format.h:291:1: note: 'folly::format' declared here
+C/C++: format(StringPiece fmt, Args&&... args) {
+C/C++: ^
+C/C++: In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-community/netinfo/android/build/generated/source/codegen/jni/react/renderer/components/RNCNetInfoSpec/Props.cpp:13:
+C/C++: In file included from C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/propsConversions.h:15:
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/graphicsConversions.h:71:14: error: no viable conversion from returned value of type 'Formatter<false, const float &>' to function return type 'folly::dynamic'
+C/C++:       return std::format("{}%", dimension.value);
+C/C++:              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:238:18: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const ObjectMaker &' for 1st argument
+C/C++:   /* implicit */ dynamic(ObjectMaker const&) = delete;
+C/C++:                  ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:289:3: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const dynamic &' for 1st argument
+C/C++:   dynamic(dynamic const&);
+C/C++:   ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:290:3: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'dynamic &&' for 1st argument
+C/C++:   dynamic(dynamic&&) noexcept;
+C/C++:   ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:321:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::nullptr_t' for 1st argument
+C/C++: inline dynamic::dynamic(std::nullptr_t) : type_(NULLT) {}
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:323:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'void (*)(EmptyArrayTag)' for 1st argument
+C/C++: inline dynamic::dynamic(void (*)(EmptyArrayTag)) : type_(ARRAY) {
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:327:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'ObjectMaker (*)()' for 1st argument
+C/C++: inline dynamic::dynamic(ObjectMaker (*)()) : type_(OBJECT) {
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:331:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const char *' for 1st argument
+C/C++: inline dynamic::dynamic(char const* s) : type_(STRING) {
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:335:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::string' (aka 'basic_string<char>') for 1st argument
+C/C++: inline dynamic::dynamic(std::string s) : type_(STRING) {
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:344:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'ObjectMaker &&' for 1st argument
+C/C++: inline dynamic::dynamic(ObjectMaker&& maker) : type_(OBJECT) {
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:376:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::vector<bool>::reference' (aka '__bit_reference<vector<bool, allocator<bool>>>') for 1st argument
+C/C++: inline dynamic::dynamic(std::vector<bool>::reference b)
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:378:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'VectorBoolConstRefCtorType' (aka 'std::__bit_const_reference<std::vector<bool>>') for 1st argument
+C/C++: inline dynamic::dynamic(VectorBoolConstRefCtorType b)
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:340:17: note: candidate template ignored: requirement 'is_detected_v<folly::dynamic_detail::detect_construct_string, folly::Formatter<false, const float &>>' was not satisfied [with Stringish = Formatter<false, const float &>]
+C/C++: inline dynamic::dynamic(Stringish&& s) : type_(STRING) {
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:384:10: note: candidate template ignored: substitution failure [with T = Formatter<false, const float &>]: implicit instantiation of undefined template 'folly::dynamic::NumericTypeHelper<folly::Formatter<false, const float &>>'
+C/C++: dynamic::dynamic(T t) {
+C/C++:          ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:1115:12: note: explicit constructor is not a candidate
+C/C++:   explicit dynamic(Array&& r);
+C/C++:            ^
+C/C++: 2 errors generated.
+C/C++: C:\Users\ASUS\AppData\Local\Android\Sdk\ndk\26.3.11579264\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android24 --sysroot=C:/Users/ASUS/AppData/Local/Android/Sdk/ndk/26.3.11579264/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DRN_SERIALIZABLE_STATE -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@walletconnect/react-native-compat/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@walletconnect/react-native-compat/android/build/generated/source/codegen/jni/react/renderer/components/RNRNWalletConnectModuleSpec -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/83198c47a1c402754cadaa99718025d1/transformed/fbjni-0.7.0/prefab/modules/fbjni/include -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/jsi/include -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -Wall -Werror -fexceptions -frtti -std=c++20 -DFOLLY_NO_CONFIG=1 -DLOG_TAG=\"ReactNative\" -DFOLLY_HAVE_CLOCK_GETTIME=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_CFG_NO_COROUTINES=1 -DFOLLY_MOBILE=1 -DFOLLY_HAVE_RECVMMSG=1 -DFOLLY_HAVE_PTHREAD=1 -DFOLLY_HAVE_XSI_STRERROR_R=1 -MD -MT RNRNWalletConnectModuleSpec_autolinked_build/CMakeFiles/react_codegen_RNRNWalletConnectModuleSpec.dir/a16a6be5cd42917ed36f71523939fa9e/Props.cpp.o -MF RNRNWalletConnectModuleSpec_autolinked_build\CMakeFiles\react_codegen_RNRNWalletConnectModuleSpec.dir\a16a6be5cd42917ed36f71523939fa9e\Props.cpp.o.d -o RNRNWalletConnectModuleSpec_autolinked_build/CMakeFiles/react_codegen_RNRNWalletConnectModuleSpec.dir/a16a6be5cd42917ed36f71523939fa9e/Props.cpp.o -c C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@walletconnect/react-native-compat/android/build/generated/source/codegen/jni/react/renderer/components/RNRNWalletConnectModuleSpec/Props.cpp      
+C/C++: In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@walletconnect/react-native-compat/android/build/generated/source/codegen/jni/react/renderer/components/RNRNWalletConnectModuleSpec/Props.cpp:13:
+C/C++: In file included from C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/propsConversions.h:15:
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/graphicsConversions.h:71:14: error: no member named 'format' in namespace 'std'; did you mean 'folly::format'?
+C/C++:       return std::format("{}%", dimension.value);
+C/C++:              ^~~~~
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/Format.h:291:1: note: 'folly::format' declared here
+C/C++: format(StringPiece fmt, Args&&... args) {
+C/C++: ^
+C/C++: In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@walletconnect/react-native-compat/android/build/generated/source/codegen/jni/react/renderer/components/RNRNWalletConnectModuleSpec/Props.cpp:13:
+C/C++: In file included from C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/propsConversions.h:15:
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/graphicsConversions.h:71:14: error: no viable conversion from returned value of type 'Formatter<false, const float &>' to function return type 'folly::dynamic'
+C/C++:       return std::format("{}%", dimension.value);
+C/C++:              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:238:18: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const ObjectMaker &' for 1st argument
+C/C++:   /* implicit */ dynamic(ObjectMaker const&) = delete;
+C/C++:                  ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:289:3: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const dynamic &' for 1st argument
+C/C++:   dynamic(dynamic const&);
+C/C++:   ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:290:3: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'dynamic &&' for 1st argument
+C/C++:   dynamic(dynamic&&) noexcept;
+C/C++:   ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:321:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::nullptr_t' for 1st argument
+C/C++: inline dynamic::dynamic(std::nullptr_t) : type_(NULLT) {}
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:323:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'void (*)(EmptyArrayTag)' for 1st argument
+C/C++: inline dynamic::dynamic(void (*)(EmptyArrayTag)) : type_(ARRAY) {
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:327:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'ObjectMaker (*)()' for 1st argument
+C/C++: inline dynamic::dynamic(ObjectMaker (*)()) : type_(OBJECT) {
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:331:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const char *' for 1st argument
+C/C++: inline dynamic::dynamic(char const* s) : type_(STRING) {
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:335:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::string' (aka 'basic_string<char>') for 1st argument
+C/C++: inline dynamic::dynamic(std::string s) : type_(STRING) {
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:344:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'ObjectMaker &&' for 1st argument
+C/C++: inline dynamic::dynamic(ObjectMaker&& maker) : type_(OBJECT) {
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:376:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::vector<bool>::reference' (aka '__bit_reference<vector<bool, allocator<bool>>>') for 1st argument
+C/C++: inline dynamic::dynamic(std::vector<bool>::reference b)
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:378:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'VectorBoolConstRefCtorType' (aka 'std::__bit_const_reference<std::vector<bool>>') for 1st argument
+C/C++: inline dynamic::dynamic(VectorBoolConstRefCtorType b)
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:340:17: note: candidate template ignored: requirement 'is_detected_v<folly::dynamic_detail::detect_construct_string, folly::Formatter<false, const float &>>' was not satisfied [with Stringish = Formatter<false, const float &>]
+C/C++: inline dynamic::dynamic(Stringish&& s) : type_(STRING) {
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:384:10: note: candidate template ignored: substitution failure [with T = Formatter<false, const float &>]: implicit instantiation of undefined template 'folly::dynamic::NumericTypeHelper<folly::Formatter<false, const float &>>'
+C/C++: dynamic::dynamic(T t) {
+C/C++:          ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:1115:12: note: explicit constructor is not a candidate
+C/C++:   explicit dynamic(Array&& r);
+C/C++:            ^
+C/C++: 2 errors generated.
+C/C++: C:\Users\ASUS\AppData\Local\Android\Sdk\ndk\26.3.11579264\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android24 --sysroot=C:/Users/ASUS/AppData/Local/Android/Sdk/ndk/26.3.11579264/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DRN_SERIALIZABLE_STATE -Dappmodules_EXPORTS -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native/ReactAndroid/cmake-utils/default-app-setup -IC:/Users/ASUS/blockchain-app/blockchain-frontend/android/app/build/generated/autolinking/src/main/jni -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-safe-area-context/android/src/main/jni -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-screens/android/src/main/jni -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-async-storage/async-storage/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-async-storage/async-storage/android/build/generated/source/codegen/jni/react/renderer/components/rnasyncstorage -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-community/netinfo/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-community/netinfo/android/build/generated/source/codegen/jni/react/renderer/components/RNCNetInfoSpec -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@sentry/react-native/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@sentry/react-native/android/build/generated/source/codegen/jni/react/renderer/components/RNSentrySpec -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@walletconnect/react-native-compat/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@walletconnect/react-native-compat/android/build/generated/source/codegen/jni/react/renderer/components/RNRNWalletConnectModuleSpec -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/lottie-react-native/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/lottie-react-native/android/build/generated/source/codegen/jni/react/renderer/components/lottiereactnative -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/react/renderer/components/rngesturehandler_codegen -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-reanimated/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-reanimated/android/build/generated/source/codegen/jni/react/renderer/components/rnreanimated -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-worklets/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-worklets/android/build/generated/source/codegen/jni/react/renderer/components/rnworklets -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-safe-area-context/android/src/main/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-safe-area-context/android/src/main/jni/../../../../common/cpp -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-safe-area-context/android/src/main/jni/../../../build/generated/source/codegen/jni -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-safe-area-context/android/src/main/jni/../../../build/generated/source/codegen/jni/react/renderer/components/safeareacontext -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-screens/android/src/main/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-screens/android/src/main/jni/../../../../common/cpp -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-screens/android/src/main/jni/../../../build/generated/source/codegen/jni -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-screens/android/src/main/jni/../../../build/generated/source/codegen/jni/react/renderer/components/rnscreens -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-svg/android/src/main/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-svg/android/src/main/jni/../../../../common/cpp -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-svg/android/src/main/jni/../../../build/generated/source/codegen/jni -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-svg/android/src/main/jni/../../../build/generated/source/codegen/jni/react/renderer/components/rnsvg -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-svg/android/src/main/jni -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-vector-icons/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-vector-icons/android/build/generated/source/codegen/jni/react/renderer/components/RNVectorIconsSpec -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/83198c47a1c402754cadaa99718025d1/transformed/fbjni-0.7.0/prefab/modules/fbjni/include -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/jsi/include -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -Wall -Werror -fexceptions -frtti -std=c++20 -DFOLLY_NO_CONFIG=1 -DLOG_TAG=\"ReactNative\" -DFOLLY_HAVE_CLOCK_GETTIME=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_CFG_NO_COROUTINES=1 -DFOLLY_MOBILE=1 -DFOLLY_HAVE_RECVMMSG=1 -DFOLLY_HAVE_PTHREAD=1 -DFOLLY_HAVE_XSI_STRERROR_R=1 -MD -MT CMakeFiles/appmodules.dir/C_/Users/ASUS/blockchain-app/blockchain-frontend/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp.o -MF CMakeFiles\appmodules.dir\C_\Users\ASUS\blockchain-app\blockchain-frontend\android\app\build\generated\autolinking\src\main\jni\autolinking.cpp.o.d -o CMakeFiles/appmodules.dir/C_/Users/ASUS/blockchain-app/blockchain-frontend/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp.o -c C:/Users/ASUS/blockchain-app/blockchain-frontend/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp
+C/C++: In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp:16:
+C/C++: In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/lottie-react-native/android/build/generated/source/codegen/jni/./react/renderer/components/lottiereactnative/ComponentDescriptors.h:13:
+C/C++: In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/lottie-react-native/android/build/generated/source/codegen/jni/./react/renderer/components/lottiereactnative/ShadowNodes.h:14:
+C/C++: In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/lottie-react-native/android/build/generated/source/codegen/jni/./react/renderer/components/lottiereactnative/Props.h:14:
+C/C++: In file included from C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/propsConversions.h:15:
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/graphicsConversions.h:71:14: error: no member named 'format' in namespace 'std'; did you mean 'folly::format'?
+C/C++:       return std::format("{}%", dimension.value);
+C/C++:              ^~~~~
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/Format.h:291:1: note: 'folly::format' declared here
+C/C++: format(StringPiece fmt, Args&&... args) {
+C/C++: ^
+C/C++: In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp:16:
+C/C++: In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/lottie-react-native/android/build/generated/source/codegen/jni/./react/renderer/components/lottiereactnative/ComponentDescriptors.h:13:
+C/C++: In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/lottie-react-native/android/build/generated/source/codegen/jni/./react/renderer/components/lottiereactnative/ShadowNodes.h:14:
+C/C++: In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/lottie-react-native/android/build/generated/source/codegen/jni/./react/renderer/components/lottiereactnative/Props.h:14:
+C/C++: In file included from C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/propsConversions.h:15:
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/graphicsConversions.h:71:14: error: no viable conversion from returned value of type 'Formatter<false, const float &>' to function return type 'folly::dynamic'
+C/C++:       return std::format("{}%", dimension.value);
+C/C++:              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:238:18: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const ObjectMaker &' for 1st argument
+C/C++:   /* implicit */ dynamic(ObjectMaker const&) = delete;
+C/C++:                  ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:289:3: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const dynamic &' for 1st argument
+C/C++:   dynamic(dynamic const&);
+C/C++:   ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:290:3: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'dynamic &&' for 1st argument
+C/C++:   dynamic(dynamic&&) noexcept;
+C/C++:   ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:321:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::nullptr_t' for 1st argument
+C/C++: inline dynamic::dynamic(std::nullptr_t) : type_(NULLT) {}
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:323:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'void (*)(EmptyArrayTag)' for 1st argument
+C/C++: inline dynamic::dynamic(void (*)(EmptyArrayTag)) : type_(ARRAY) {
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:327:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'ObjectMaker (*)()' for 1st argument
+C/C++: inline dynamic::dynamic(ObjectMaker (*)()) : type_(OBJECT) {
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:331:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const char *' for 1st argument
+C/C++: inline dynamic::dynamic(char const* s) : type_(STRING) {
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:335:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::string' (aka 'basic_string<char>') for 1st argument
+C/C++: inline dynamic::dynamic(std::string s) : type_(STRING) {
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:344:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'ObjectMaker &&' for 1st argument
+C/C++: inline dynamic::dynamic(ObjectMaker&& maker) : type_(OBJECT) {
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:376:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::vector<bool>::reference' (aka '__bit_reference<vector<bool, allocator<bool>>>') for 1st argument
+C/C++: inline dynamic::dynamic(std::vector<bool>::reference b)
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:378:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'VectorBoolConstRefCtorType' (aka 'std::__bit_const_reference<std::vector<bool>>') for 1st argument
+C/C++: inline dynamic::dynamic(VectorBoolConstRefCtorType b)
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:340:17: note: candidate template ignored: requirement 'is_detected_v<folly::dynamic_detail::detect_construct_string, folly::Formatter<false, const float &>>' was not satisfied [with Stringish = Formatter<false, const float &>]
+C/C++: inline dynamic::dynamic(Stringish&& s) : type_(STRING) {
+C/C++:                 ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:384:10: note: candidate template ignored: substitution failure [with T = Formatter<false, const float &>]: implicit instantiation of undefined template 'folly::dynamic::NumericTypeHelper<folly::Formatter<false, const float &>>'
+C/C++: dynamic::dynamic(T t) {
+C/C++:          ^
+C/C++: C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:1115:12: note: explicit constructor is not a candidate
+C/C++:   explicit dynamic(Array&& r);
+C/C++:            ^
+C/C++: 2 errors generated.
+
+> Task :app:buildCMakeDebug[arm64-v8a] FAILED
+
+[Incubating] Problems report is available at: file:///C:/Users/ASUS/blockchain-app/blockchain-frontend/android/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:buildCMakeDebug[arm64-v8a]'.
+> com.android.ide.common.process.ProcessException: ninja: Entering directory `C:\Users\ASUS\blockchain-app\blockchain-frontend\android\app\.cxx\Debug\2kw3n83s\arm64-v8a'
+  [0/2] Re-checking globbed directories...
+  [1/85] Building CXX object RNSentrySpec_autolinked_build/CMakeFiles/react_codegen_RNSentrySpec.dir/react/renderer/components/RNSentrySpec/States.cpp.o       
+  [2/85] Building CXX object RNRNWalletConnectModuleSpec_autolinked_build/CMakeFiles/react_codegen_RNRNWalletConnectModuleSpec.dir/a16a6be5cd42917ed36f71523939fa9e/EventEmitters.cpp.o
+  [3/85] Building CXX object RNRNWalletConnectModuleSpec_autolinked_build/CMakeFiles/react_codegen_RNRNWalletConnectModuleSpec.dir/RNRNWalletConnectModuleSpec-generated.cpp.o
+  [4/85] Building CXX object rnasyncstorage_autolinked_build/CMakeFiles/react_codegen_rnasyncstorage.dir/react/renderer/components/rnasyncstorage/Props.cpp.o  
+  FAILED: rnasyncstorage_autolinked_build/CMakeFiles/react_codegen_rnasyncstorage.dir/react/renderer/components/rnasyncstorage/Props.cpp.o
+  C:\Users\ASUS\AppData\Local\Android\Sdk\ndk\26.3.11579264\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android24 --sysroot=C:/Users/ASUS/AppData/Local/Android/Sdk/ndk/26.3.11579264/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DRN_SERIALIZABLE_STATE -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-async-storage/async-storage/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-async-storage/async-storage/android/build/generated/source/codegen/jni/react/renderer/components/rnasyncstorage -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/83198c47a1c402754cadaa99718025d1/transformed/fbjni-0.7.0/prefab/modules/fbjni/include -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/jsi/include -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -Wall -Werror -fexceptions -frtti -std=c++20 -DFOLLY_NO_CONFIG=1 -DLOG_TAG=\"ReactNative\" -DFOLLY_HAVE_CLOCK_GETTIME=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_CFG_NO_COROUTINES=1 -DFOLLY_MOBILE=1 -DFOLLY_HAVE_RECVMMSG=1 -DFOLLY_HAVE_PTHREAD=1 -DFOLLY_HAVE_XSI_STRERROR_R=1 -MD -MT rnasyncstorage_autolinked_build/CMakeFiles/react_codegen_rnasyncstorage.dir/react/renderer/components/rnasyncstorage/Props.cpp.o -MF rnasyncstorage_autolinked_build\CMakeFiles\react_codegen_rnasyncstorage.dir\react\renderer\components\rnasyncstorage\Props.cpp.o.d -o rnasyncstorage_autolinked_build/CMakeFiles/react_codegen_rnasyncstorage.dir/react/renderer/components/rnasyncstorage/Props.cpp.o -c C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-async-storage/async-storage/android/build/generated/source/codegen/jni/react/renderer/components/rnasyncstorage/Props.cpp
+  In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-async-storage/async-storage/android/build/generated/source/codegen/jni/react/renderer/components/rnasyncstorage/Props.cpp:13:
+  In file included from C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/propsConversions.h:15:
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/graphicsConversions.h:71:14: error: no member named 'format' in namespace 'std'; did you mean 'folly::format'?
+        return std::format("{}%", dimension.value);
+               ^~~~~
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/Format.h:291:1: note: 'folly::format' declared here
+  format(StringPiece fmt, Args&&... args) {
+  ^
+  In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-async-storage/async-storage/android/build/generated/source/codegen/jni/react/renderer/components/rnasyncstorage/Props.cpp:13:
+  In file included from C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/propsConversions.h:15:
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/graphicsConversions.h:71:14: error: no viable conversion from returned value of type 'Formatter<false, const float &>' to function return type 'folly::dynamic'
+        return std::format("{}%", dimension.value);
+               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:238:18: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const ObjectMaker &' for 1st argument
+    /* implicit */ dynamic(ObjectMaker const&) = delete;
+                   ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:289:3: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const dynamic &' for 1st argument
+    dynamic(dynamic const&);
+    ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:290:3: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'dynamic &&' for 1st argument    
+    dynamic(dynamic&&) noexcept;
+    ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:321:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::nullptr_t' for 1st argument
+  inline dynamic::dynamic(std::nullptr_t) : type_(NULLT) {}
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:323:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'void (*)(EmptyArrayTag)' for 1st argument
+  inline dynamic::dynamic(void (*)(EmptyArrayTag)) : type_(ARRAY) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:327:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'ObjectMaker (*)()' for 1st argument
+  inline dynamic::dynamic(ObjectMaker (*)()) : type_(OBJECT) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:331:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const char *' for 1st argument
+  inline dynamic::dynamic(char const* s) : type_(STRING) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:335:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::string' (aka 'basic_string<char>') for 1st argument
+  inline dynamic::dynamic(std::string s) : type_(STRING) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:344:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'ObjectMaker &&' for 1st argument
+  inline dynamic::dynamic(ObjectMaker&& maker) : type_(OBJECT) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:376:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::vector<bool>::reference' (aka '__bit_reference<vector<bool, allocator<bool>>>') for 1st argument
+  inline dynamic::dynamic(std::vector<bool>::reference b)
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:378:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'VectorBoolConstRefCtorType' (aka 'std::__bit_const_reference<std::vector<bool>>') for 1st argument
+  inline dynamic::dynamic(VectorBoolConstRefCtorType b)
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:340:17: note: candidate template ignored: requirement 'is_detected_v<folly::dynamic_detail::detect_construct_string, folly::Formatter<false, const float &>>' was not satisfied [with Stringish = Formatter<false, const float &>]
+  inline dynamic::dynamic(Stringish&& s) : type_(STRING) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:384:10: note: candidate template ignored: substitution failure [with T = Formatter<false, const float &>]: implicit instantiation of undefined template 'folly::dynamic::NumericTypeHelper<folly::Formatter<false, const float &>>'
+  dynamic::dynamic(T t) {
+           ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:1115:12: note: explicit constructor is not a candidate
+    explicit dynamic(Array&& r);
+             ^
+  2 errors generated.
+  [5/85] Building CXX object RNSentrySpec_autolinked_build/CMakeFiles/react_codegen_RNSentrySpec.dir/react/renderer/components/RNSentrySpec/Props.cpp.o        
+  FAILED: RNSentrySpec_autolinked_build/CMakeFiles/react_codegen_RNSentrySpec.dir/react/renderer/components/RNSentrySpec/Props.cpp.o
+  C:\Users\ASUS\AppData\Local\Android\Sdk\ndk\26.3.11579264\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android24 --sysroot=C:/Users/ASUS/AppData/Local/Android/Sdk/ndk/26.3.11579264/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DRN_SERIALIZABLE_STATE -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@sentry/react-native/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@sentry/react-native/android/build/generated/source/codegen/jni/react/renderer/components/RNSentrySpec -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/83198c47a1c402754cadaa99718025d1/transformed/fbjni-0.7.0/prefab/modules/fbjni/include -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/jsi/include -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -Wall -Werror -fexceptions -frtti -std=c++20 -DFOLLY_NO_CONFIG=1 -DLOG_TAG=\"ReactNative\" -DFOLLY_HAVE_CLOCK_GETTIME=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_CFG_NO_COROUTINES=1 -DFOLLY_MOBILE=1 -DFOLLY_HAVE_RECVMMSG=1 -DFOLLY_HAVE_PTHREAD=1 -DFOLLY_HAVE_XSI_STRERROR_R=1 -MD -MT RNSentrySpec_autolinked_build/CMakeFiles/react_codegen_RNSentrySpec.dir/react/renderer/components/RNSentrySpec/Props.cpp.o -MF RNSentrySpec_autolinked_build\CMakeFiles\react_codegen_RNSentrySpec.dir\react\renderer\components\RNSentrySpec\Props.cpp.o.d -o RNSentrySpec_autolinked_build/CMakeFiles/react_codegen_RNSentrySpec.dir/react/renderer/components/RNSentrySpec/Props.cpp.o -c C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@sentry/react-native/android/build/generated/source/codegen/jni/react/renderer/components/RNSentrySpec/Props.cpp
+  In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@sentry/react-native/android/build/generated/source/codegen/jni/react/renderer/components/RNSentrySpec/Props.cpp:13:
+  In file included from C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/propsConversions.h:15:
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/graphicsConversions.h:71:14: error: no member named 'format' in namespace 'std'; did you mean 'folly::format'?
+        return std::format("{}%", dimension.value);
+               ^~~~~
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/Format.h:291:1: note: 'folly::format' declared here
+  format(StringPiece fmt, Args&&... args) {
+  ^
+  In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@sentry/react-native/android/build/generated/source/codegen/jni/react/renderer/components/RNSentrySpec/Props.cpp:13:
+  In file included from C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/propsConversions.h:15:
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/graphicsConversions.h:71:14: error: no viable conversion from returned value of type 'Formatter<false, const float &>' to function return type 'folly::dynamic'
+        return std::format("{}%", dimension.value);
+               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:238:18: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const ObjectMaker &' for 1st argument
+    /* implicit */ dynamic(ObjectMaker const&) = delete;
+                   ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:289:3: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const dynamic &' for 1st argument
+    dynamic(dynamic const&);
+    ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:290:3: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'dynamic &&' for 1st argument    
+    dynamic(dynamic&&) noexcept;
+    ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:321:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::nullptr_t' for 1st argument
+  inline dynamic::dynamic(std::nullptr_t) : type_(NULLT) {}
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:323:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'void (*)(EmptyArrayTag)' for 1st argument
+  inline dynamic::dynamic(void (*)(EmptyArrayTag)) : type_(ARRAY) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:327:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'ObjectMaker (*)()' for 1st argument
+  inline dynamic::dynamic(ObjectMaker (*)()) : type_(OBJECT) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:331:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const char *' for 1st argument
+  inline dynamic::dynamic(char const* s) : type_(STRING) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:335:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::string' (aka 'basic_string<char>') for 1st argument
+  inline dynamic::dynamic(std::string s) : type_(STRING) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:344:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'ObjectMaker &&' for 1st argument
+  inline dynamic::dynamic(ObjectMaker&& maker) : type_(OBJECT) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:376:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::vector<bool>::reference' (aka '__bit_reference<vector<bool, allocator<bool>>>') for 1st argument
+  inline dynamic::dynamic(std::vector<bool>::reference b)
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:378:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'VectorBoolConstRefCtorType' (aka 'std::__bit_const_reference<std::vector<bool>>') for 1st argument
+  inline dynamic::dynamic(VectorBoolConstRefCtorType b)
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:340:17: note: candidate template ignored: requirement 'is_detected_v<folly::dynamic_detail::detect_construct_string, folly::Formatter<false, const float &>>' was not satisfied [with Stringish = Formatter<false, const float &>]
+  inline dynamic::dynamic(Stringish&& s) : type_(STRING) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:384:10: note: candidate template ignored: substitution failure [with T = Formatter<false, const float &>]: implicit instantiation of undefined template 'folly::dynamic::NumericTypeHelper<folly::Formatter<false, const float &>>'
+  dynamic::dynamic(T t) {
+           ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:1115:12: note: explicit constructor is not a candidate
+    explicit dynamic(Array&& r);
+             ^
+  2 errors generated.
+  [6/85] Building CXX object RNSentrySpec_autolinked_build/CMakeFiles/react_codegen_RNSentrySpec.dir/react/renderer/components/RNSentrySpec/ShadowNodes.cpp.o  
+  [7/85] Building CXX object RNRNWalletConnectModuleSpec_autolinked_build/CMakeFiles/react_codegen_RNRNWalletConnectModuleSpec.dir/react/renderer/components/RNRNWalletConnectModuleSpec/ComponentDescriptors.cpp.o
+  [8/85] Building CXX object RNRNWalletConnectModuleSpec_autolinked_build/CMakeFiles/react_codegen_RNRNWalletConnectModuleSpec.dir/a16a6be5cd42917ed36f71523939fa9e/ShadowNodes.cpp.o
+  [9/85] Building CXX object RNCNetInfoSpec_autolinked_build/CMakeFiles/react_codegen_RNCNetInfoSpec.dir/react/renderer/components/RNCNetInfoSpec/Props.cpp.o  
+  FAILED: RNCNetInfoSpec_autolinked_build/CMakeFiles/react_codegen_RNCNetInfoSpec.dir/react/renderer/components/RNCNetInfoSpec/Props.cpp.o
+  C:\Users\ASUS\AppData\Local\Android\Sdk\ndk\26.3.11579264\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android24 --sysroot=C:/Users/ASUS/AppData/Local/Android/Sdk/ndk/26.3.11579264/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DRN_SERIALIZABLE_STATE -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-community/netinfo/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-community/netinfo/android/build/generated/source/codegen/jni/react/renderer/components/RNCNetInfoSpec -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/83198c47a1c402754cadaa99718025d1/transformed/fbjni-0.7.0/prefab/modules/fbjni/include -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/jsi/include -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -Wall -Werror -fexceptions -frtti -std=c++20 -DFOLLY_NO_CONFIG=1 -DLOG_TAG=\"ReactNative\" -DFOLLY_HAVE_CLOCK_GETTIME=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_CFG_NO_COROUTINES=1 -DFOLLY_MOBILE=1 -DFOLLY_HAVE_RECVMMSG=1 -DFOLLY_HAVE_PTHREAD=1 -DFOLLY_HAVE_XSI_STRERROR_R=1 -MD -MT RNCNetInfoSpec_autolinked_build/CMakeFiles/react_codegen_RNCNetInfoSpec.dir/react/renderer/components/RNCNetInfoSpec/Props.cpp.o -MF RNCNetInfoSpec_autolinked_build\CMakeFiles\react_codegen_RNCNetInfoSpec.dir\react\renderer\components\RNCNetInfoSpec\Props.cpp.o.d -o RNCNetInfoSpec_autolinked_build/CMakeFiles/react_codegen_RNCNetInfoSpec.dir/react/renderer/components/RNCNetInfoSpec/Props.cpp.o -c C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-community/netinfo/android/build/generated/source/codegen/jni/react/renderer/components/RNCNetInfoSpec/Props.cpp
+  In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-community/netinfo/android/build/generated/source/codegen/jni/react/renderer/components/RNCNetInfoSpec/Props.cpp:13:
+  In file included from C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/propsConversions.h:15:
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/graphicsConversions.h:71:14: error: no member named 'format' in namespace 'std'; did you mean 'folly::format'?
+        return std::format("{}%", dimension.value);
+               ^~~~~
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/Format.h:291:1: note: 'folly::format' declared here
+  format(StringPiece fmt, Args&&... args) {
+  ^
+  In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-community/netinfo/android/build/generated/source/codegen/jni/react/renderer/components/RNCNetInfoSpec/Props.cpp:13:
+  In file included from C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/propsConversions.h:15:
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/graphicsConversions.h:71:14: error: no viable conversion from returned value of type 'Formatter<false, const float &>' to function return type 'folly::dynamic'
+        return std::format("{}%", dimension.value);
+               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:238:18: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const ObjectMaker &' for 1st argument
+    /* implicit */ dynamic(ObjectMaker const&) = delete;
+                   ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:289:3: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const dynamic &' for 1st argument
+    dynamic(dynamic const&);
+    ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:290:3: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'dynamic &&' for 1st argument    
+    dynamic(dynamic&&) noexcept;
+    ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:321:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::nullptr_t' for 1st argument
+  inline dynamic::dynamic(std::nullptr_t) : type_(NULLT) {}
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:323:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'void (*)(EmptyArrayTag)' for 1st argument
+  inline dynamic::dynamic(void (*)(EmptyArrayTag)) : type_(ARRAY) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:327:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'ObjectMaker (*)()' for 1st argument
+  inline dynamic::dynamic(ObjectMaker (*)()) : type_(OBJECT) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:331:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const char *' for 1st argument
+  inline dynamic::dynamic(char const* s) : type_(STRING) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:335:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::string' (aka 'basic_string<char>') for 1st argument
+  inline dynamic::dynamic(std::string s) : type_(STRING) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:344:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'ObjectMaker &&' for 1st argument
+  inline dynamic::dynamic(ObjectMaker&& maker) : type_(OBJECT) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:376:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::vector<bool>::reference' (aka '__bit_reference<vector<bool, allocator<bool>>>') for 1st argument
+  inline dynamic::dynamic(std::vector<bool>::reference b)
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:378:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'VectorBoolConstRefCtorType' (aka 'std::__bit_const_reference<std::vector<bool>>') for 1st argument
+  inline dynamic::dynamic(VectorBoolConstRefCtorType b)
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:340:17: note: candidate template ignored: requirement 'is_detected_v<folly::dynamic_detail::detect_construct_string, folly::Formatter<false, const float &>>' was not satisfied [with Stringish = Formatter<false, const float &>]
+  inline dynamic::dynamic(Stringish&& s) : type_(STRING) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:384:10: note: candidate template ignored: substitution failure [with T = Formatter<false, const float &>]: implicit instantiation of undefined template 'folly::dynamic::NumericTypeHelper<folly::Formatter<false, const float &>>'
+  dynamic::dynamic(T t) {
+           ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:1115:12: note: explicit constructor is not a candidate
+    explicit dynamic(Array&& r);
+             ^
+  2 errors generated.
+  [10/85] Building CXX object lottiereactnative_autolinked_build/CMakeFiles/react_codegen_lottiereactnative.dir/react/renderer/components/lottiereactnative/States.cpp.o
+  [11/85] Building CXX object RNRNWalletConnectModuleSpec_autolinked_build/CMakeFiles/react_codegen_RNRNWalletConnectModuleSpec.dir/a16a6be5cd42917ed36f71523939fa9e/States.cpp.o
+  [12/85] Building CXX object RNRNWalletConnectModuleSpec_autolinked_build/CMakeFiles/react_codegen_RNRNWalletConnectModuleSpec.dir/a16a6be5cd42917ed36f71523939fa9e/Props.cpp.o
+  FAILED: RNRNWalletConnectModuleSpec_autolinked_build/CMakeFiles/react_codegen_RNRNWalletConnectModuleSpec.dir/a16a6be5cd42917ed36f71523939fa9e/Props.cpp.o   
+  C:\Users\ASUS\AppData\Local\Android\Sdk\ndk\26.3.11579264\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android24 --sysroot=C:/Users/ASUS/AppData/Local/Android/Sdk/ndk/26.3.11579264/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DRN_SERIALIZABLE_STATE -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@walletconnect/react-native-compat/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@walletconnect/react-native-compat/android/build/generated/source/codegen/jni/react/renderer/components/RNRNWalletConnectModuleSpec -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/83198c47a1c402754cadaa99718025d1/transformed/fbjni-0.7.0/prefab/modules/fbjni/include -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/jsi/include -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -Wall -Werror -fexceptions -frtti -std=c++20 -DFOLLY_NO_CONFIG=1 -DLOG_TAG=\"ReactNative\" -DFOLLY_HAVE_CLOCK_GETTIME=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_CFG_NO_COROUTINES=1 -DFOLLY_MOBILE=1 -DFOLLY_HAVE_RECVMMSG=1 -DFOLLY_HAVE_PTHREAD=1 -DFOLLY_HAVE_XSI_STRERROR_R=1 -MD -MT RNRNWalletConnectModuleSpec_autolinked_build/CMakeFiles/react_codegen_RNRNWalletConnectModuleSpec.dir/a16a6be5cd42917ed36f71523939fa9e/Props.cpp.o -MF RNRNWalletConnectModuleSpec_autolinked_build\CMakeFiles\react_codegen_RNRNWalletConnectModuleSpec.dir\a16a6be5cd42917ed36f71523939fa9e\Props.cpp.o.d -o RNRNWalletConnectModuleSpec_autolinked_build/CMakeFiles/react_codegen_RNRNWalletConnectModuleSpec.dir/a16a6be5cd42917ed36f71523939fa9e/Props.cpp.o -c C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@walletconnect/react-native-compat/android/build/generated/source/codegen/jni/react/renderer/components/RNRNWalletConnectModuleSpec/Props.cpp
+  In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@walletconnect/react-native-compat/android/build/generated/source/codegen/jni/react/renderer/components/RNRNWalletConnectModuleSpec/Props.cpp:13:
+  In file included from C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/propsConversions.h:15:
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/graphicsConversions.h:71:14: error: no member named 'format' in namespace 'std'; did you mean 'folly::format'?
+        return std::format("{}%", dimension.value);
+               ^~~~~
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/Format.h:291:1: note: 'folly::format' declared here
+  format(StringPiece fmt, Args&&... args) {
+  ^
+  In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@walletconnect/react-native-compat/android/build/generated/source/codegen/jni/react/renderer/components/RNRNWalletConnectModuleSpec/Props.cpp:13:
+  In file included from C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/propsConversions.h:15:
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/graphicsConversions.h:71:14: error: no viable conversion from returned value of type 'Formatter<false, const float &>' to function return type 'folly::dynamic'
+        return std::format("{}%", dimension.value);
+               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:238:18: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const ObjectMaker &' for 1st argument
+    /* implicit */ dynamic(ObjectMaker const&) = delete;
+                   ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:289:3: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const dynamic &' for 1st argument
+    dynamic(dynamic const&);
+    ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:290:3: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'dynamic &&' for 1st argument    
+    dynamic(dynamic&&) noexcept;
+    ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:321:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::nullptr_t' for 1st argument
+  inline dynamic::dynamic(std::nullptr_t) : type_(NULLT) {}
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:323:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'void (*)(EmptyArrayTag)' for 1st argument
+  inline dynamic::dynamic(void (*)(EmptyArrayTag)) : type_(ARRAY) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:327:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'ObjectMaker (*)()' for 1st argument
+  inline dynamic::dynamic(ObjectMaker (*)()) : type_(OBJECT) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:331:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const char *' for 1st argument
+  inline dynamic::dynamic(char const* s) : type_(STRING) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:335:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::string' (aka 'basic_string<char>') for 1st argument
+  inline dynamic::dynamic(std::string s) : type_(STRING) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:344:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'ObjectMaker &&' for 1st argument
+  inline dynamic::dynamic(ObjectMaker&& maker) : type_(OBJECT) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:376:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::vector<bool>::reference' (aka '__bit_reference<vector<bool, allocator<bool>>>') for 1st argument
+  inline dynamic::dynamic(std::vector<bool>::reference b)
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:378:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'VectorBoolConstRefCtorType' (aka 'std::__bit_const_reference<std::vector<bool>>') for 1st argument
+  inline dynamic::dynamic(VectorBoolConstRefCtorType b)
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:340:17: note: candidate template ignored: requirement 'is_detected_v<folly::dynamic_detail::detect_construct_string, folly::Formatter<false, const float &>>' was not satisfied [with Stringish = Formatter<false, const float &>]
+  inline dynamic::dynamic(Stringish&& s) : type_(STRING) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:384:10: note: candidate template ignored: substitution failure [with T = Formatter<false, const float &>]: implicit instantiation of undefined template 'folly::dynamic::NumericTypeHelper<folly::Formatter<false, const float &>>'
+  dynamic::dynamic(T t) {
+           ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:1115:12: note: explicit constructor is not a candidate
+    explicit dynamic(Array&& r);
+             ^
+  2 errors generated.
+  [13/85] Building CXX object CMakeFiles/appmodules.dir/C_/Users/ASUS/blockchain-app/blockchain-frontend/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp.o
+  FAILED: CMakeFiles/appmodules.dir/C_/Users/ASUS/blockchain-app/blockchain-frontend/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp.o    
+  C:\Users\ASUS\AppData\Local\Android\Sdk\ndk\26.3.11579264\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android24 --sysroot=C:/Users/ASUS/AppData/Local/Android/Sdk/ndk/26.3.11579264/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DRN_SERIALIZABLE_STATE -Dappmodules_EXPORTS -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native/ReactAndroid/cmake-utils/default-app-setup -IC:/Users/ASUS/blockchain-app/blockchain-frontend/android/app/build/generated/autolinking/src/main/jni -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-safe-area-context/android/src/main/jni -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-screens/android/src/main/jni -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-async-storage/async-storage/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-async-storage/async-storage/android/build/generated/source/codegen/jni/react/renderer/components/rnasyncstorage -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-community/netinfo/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@react-native-community/netinfo/android/build/generated/source/codegen/jni/react/renderer/components/RNCNetInfoSpec -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@sentry/react-native/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@sentry/react-native/android/build/generated/source/codegen/jni/react/renderer/components/RNSentrySpec -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@walletconnect/react-native-compat/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/@walletconnect/react-native-compat/android/build/generated/source/codegen/jni/react/renderer/components/RNRNWalletConnectModuleSpec -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/lottie-react-native/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/lottie-react-native/android/build/generated/source/codegen/jni/react/renderer/components/lottiereactnative -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/react/renderer/components/rngesturehandler_codegen -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-reanimated/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-reanimated/android/build/generated/source/codegen/jni/react/renderer/components/rnreanimated -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-worklets/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-worklets/android/build/generated/source/codegen/jni/react/renderer/components/rnworklets -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-safe-area-context/android/src/main/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-safe-area-context/android/src/main/jni/../../../../common/cpp -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-safe-area-context/android/src/main/jni/../../../build/generated/source/codegen/jni -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-safe-area-context/android/src/main/jni/../../../build/generated/source/codegen/jni/react/renderer/components/safeareacontext -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-screens/android/src/main/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-screens/android/src/main/jni/../../../../common/cpp -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-screens/android/src/main/jni/../../../build/generated/source/codegen/jni -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-screens/android/src/main/jni/../../../build/generated/source/codegen/jni/react/renderer/components/rnscreens -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-svg/android/src/main/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-svg/android/src/main/jni/../../../../common/cpp -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-svg/android/src/main/jni/../../../build/generated/source/codegen/jni -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-svg/android/src/main/jni/../../../build/generated/source/codegen/jni/react/renderer/components/rnsvg -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-svg/android/src/main/jni -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-vector-icons/android/build/generated/source/codegen/jni/. -IC:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/react-native-vector-icons/android/build/generated/source/codegen/jni/react/renderer/components/RNVectorIconsSpec -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/83198c47a1c402754cadaa99718025d1/transformed/fbjni-0.7.0/prefab/modules/fbjni/include -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/jsi/include -isystem C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -Wall -Werror -fexceptions -frtti -std=c++20 -DFOLLY_NO_CONFIG=1 -DLOG_TAG=\"ReactNative\" -DFOLLY_HAVE_CLOCK_GETTIME=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_CFG_NO_COROUTINES=1 -DFOLLY_MOBILE=1 -DFOLLY_HAVE_RECVMMSG=1 -DFOLLY_HAVE_PTHREAD=1 -DFOLLY_HAVE_XSI_STRERROR_R=1 -MD -MT CMakeFiles/appmodules.dir/C_/Users/ASUS/blockchain-app/blockchain-frontend/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp.o -MF CMakeFiles\appmodules.dir\C_\Users\ASUS\blockchain-app\blockchain-frontend\android\app\build\generated\autolinking\src\main\jni\autolinking.cpp.o.d -o CMakeFiles/appmodules.dir/C_/Users/ASUS/blockchain-app/blockchain-frontend/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp.o -c C:/Users/ASUS/blockchain-app/blockchain-frontend/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp
+  In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp:16:
+  In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/lottie-react-native/android/build/generated/source/codegen/jni/./react/renderer/components/lottiereactnative/ComponentDescriptors.h:13:
+  In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/lottie-react-native/android/build/generated/source/codegen/jni/./react/renderer/components/lottiereactnative/ShadowNodes.h:14:
+  In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/lottie-react-native/android/build/generated/source/codegen/jni/./react/renderer/components/lottiereactnative/Props.h:14:
+  In file included from C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/propsConversions.h:15:
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/graphicsConversions.h:71:14: error: no member named 'format' in namespace 'std'; did you mean 'folly::format'?
+        return std::format("{}%", dimension.value);
+               ^~~~~
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/Format.h:291:1: note: 'folly::format' declared here
+  format(StringPiece fmt, Args&&... args) {
+  ^
+  In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp:16:
+  In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/lottie-react-native/android/build/generated/source/codegen/jni/./react/renderer/components/lottiereactnative/ComponentDescriptors.h:13:
+  In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/lottie-react-native/android/build/generated/source/codegen/jni/./react/renderer/components/lottiereactnative/ShadowNodes.h:14:
+  In file included from C:/Users/ASUS/blockchain-app/blockchain-frontend/node_modules/lottie-react-native/android/build/generated/source/codegen/jni/./react/renderer/components/lottiereactnative/Props.h:14:
+  In file included from C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/propsConversions.h:15:
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/react/renderer/core/graphicsConversions.h:71:14: error: no viable conversion from returned value of type 'Formatter<false, const float &>' to function return type 'folly::dynamic'
+        return std::format("{}%", dimension.value);
+               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:238:18: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const ObjectMaker &' for 1st argument
+    /* implicit */ dynamic(ObjectMaker const&) = delete;
+                   ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:289:3: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const dynamic &' for 1st argument
+    dynamic(dynamic const&);
+    ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:290:3: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'dynamic &&' for 1st argument    
+    dynamic(dynamic&&) noexcept;
+    ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:321:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::nullptr_t' for 1st argument
+  inline dynamic::dynamic(std::nullptr_t) : type_(NULLT) {}
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:323:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'void (*)(EmptyArrayTag)' for 1st argument
+  inline dynamic::dynamic(void (*)(EmptyArrayTag)) : type_(ARRAY) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:327:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'ObjectMaker (*)()' for 1st argument
+  inline dynamic::dynamic(ObjectMaker (*)()) : type_(OBJECT) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:331:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'const char *' for 1st argument
+  inline dynamic::dynamic(char const* s) : type_(STRING) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:335:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::string' (aka 'basic_string<char>') for 1st argument
+  inline dynamic::dynamic(std::string s) : type_(STRING) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:344:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'ObjectMaker &&' for 1st argument
+  inline dynamic::dynamic(ObjectMaker&& maker) : type_(OBJECT) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:376:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'std::vector<bool>::reference' (aka '__bit_reference<vector<bool, allocator<bool>>>') for 1st argument
+  inline dynamic::dynamic(std::vector<bool>::reference b)
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:378:17: note: candidate constructor not viable: no known conversion from 'Formatter<false, const float &>' to 'VectorBoolConstRefCtorType' (aka 'std::__bit_const_reference<std::vector<bool>>') for 1st argument
+  inline dynamic::dynamic(VectorBoolConstRefCtorType b)
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:340:17: note: candidate template ignored: requirement 'is_detected_v<folly::dynamic_detail::detect_construct_string, folly::Formatter<false, const float &>>' was not satisfied [with Stringish = Formatter<false, const float &>]
+  inline dynamic::dynamic(Stringish&& s) : type_(STRING) {
+                  ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic-inl.h:384:10: note: candidate template ignored: substitution failure [with T = Formatter<false, const float &>]: implicit instantiation of undefined template 'folly::dynamic::NumericTypeHelper<folly::Formatter<false, const float &>>'
+  dynamic::dynamic(T t) {
+           ^
+  C:/Users/ASUS/.gradle/caches/9.0.0/transforms/ebdf79766f4559f64a0c8b6c70cdb3d5/transformed/react-android-0.83.4-debug/prefab/modules/reactnative/include/folly/json/dynamic.h:1115:12: note: explicit constructor is not a candidate
+    explicit dynamic(Array&& r);
+             ^
+  2 errors generated.
+  ninja: build stopped: subcommand failed.
+
+  C++ build system [build] failed while executing:
+      @echo off
+      "C:\\Users\\ASUS\\AppData\\Local\\Android\\Sdk\\cmake\\3.22.1\\bin\\ninja.exe" ^
+        -C ^
+        "C:\\Users\\ASUS\\blockchain-app\\blockchain-frontend\\android\\app\\.cxx\\Debug\\2kw3n83s\\arm64-v8a" ^
+        appmodules ^
+        react_codegen_rnscreens ^
+        react_codegen_rnsvg ^
+        react_codegen_safeareacontext
+    from C:\Users\ASUS\blockchain-app\blockchain-frontend\android\app
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to generate a Build Scan (Powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.0.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.   
+
+BUILD FAILED in 3m 54s
+470 actionable tasks: 31 executed, 439 up-to-date
+Error: C:\Users\ASUS\blockchain-app\blockchain-frontend\android\gradlew.bat app:assembleDebug -x lint -x test --configure-on-demand --build-cache -PreactNativeDevServerPort=8081 -PreactNativeArchitectures=x86_64,arm64-v8a exited with non-zero code: 1
+Error: C:\Users\ASUS\blockchain-app\blockchain-frontend\android\gradlew.bat app:assembleDebug -x lint -x test --configure-on-demand --build-cache -PreactNativeDevServerPort=8081 -PreactNativeArchitectures=x86_64,arm64-v8a exited with non-zero code: 1
+    at ChildProcess.completionListener (C:\Users\ASUS\blockchain-app\blockchain-frontend\node_modules\@expo\spawn-async\src\spawnAsync.ts:67:13)
+    at Object.onceWrapper (node:events:639:26)
+    at ChildProcess.emit (node:events:524:28)
+    at ChildProcess.cp.emit (C:\Users\ASUS\blockchain-app\blockchain-frontend\node_modules\cross-spawn\lib\enoent.js:34:29)
+    at maybeClose (node:internal/child_process:1104:16)
+    at Process.ChildProcess._handle.onexit (node:internal/child_process:304:5)
+    ...
+    at spawnAsync (C:\Users\ASUS\blockchain-app\blockchain-frontend\node_modules\@expo\spawn-async\src\spawnAsync.ts:28:21)
+    at spawnGradleAsync (C:\Users\ASUS\blockchain-app\blockchain-frontend\node_modules\@expo\cli\src\start\platforms\android\gradle.ts:134:28)
+    at assembleAsync (C:\Users\ASUS\blockchain-app\blockchain-frontend\node_modules\@expo\cli\src\start\platforms\android\gradle.ts:83:16)
+    at runAndroidAsync (C:\Users\ASUS\blockchain-app\blockchain-frontend\node_modules\@expo\cli\src\run\android\runAndroidAsync.ts:62:24)
+
+ASUS@DESKTOP-53UUC16 MINGW64 ~/blockchain-app/blockchain-frontend (main)
