@@ -8,6 +8,16 @@ const RPC_URL = process.env.RPC_URL || 'https://sepolia.infura.io/v3/847d18875da
 // Chain ID for Sepolia
 const SEPOLIA_CHAIN_ID = 11155111;
 
+const ensureBytes32Compatible = (value, fieldName) => {
+  if (typeof value !== 'string' || !value.trim()) {
+    throw new Error(`${fieldName} wajib diisi`);
+  }
+
+  if (value.length > 31) {
+    throw new Error(`${fieldName} maksimal 31 karakter`);
+  }
+};
+
 /**
  * Helper to get a public JSON-RPC provider.
  */
@@ -60,6 +70,8 @@ export const registerUser = async (signer, roleText, kode, nama, kontak) => {
   if (!roleText || !kode || !nama) {
     throw new Error('Kode, nama, dan role wajib diisi untuk registrasi');
   }
+  ensureBytes32Compatible(kode, 'Kode');
+  ensureBytes32Compatible(nama, 'Nama');
 
   try {
     const contract = new Contract(CONTRACT_ADDRESS, contractABI.abi, signer);
@@ -86,6 +98,7 @@ export const ajukanAnggaran = async (signer, kodeRegulasi, jumlahAnggaran) => {
   if (!kodeRegulasi || !jumlahAnggaran) {
     throw new Error('Semua field wajib diisi untuk ajukanAnggaran');
   }
+  ensureBytes32Compatible(kodeRegulasi, 'Kode regulasi');
 
   try {
     const contract = new Contract(CONTRACT_ADDRESS, contractABI.abi, signer);
@@ -168,9 +181,10 @@ export const getInfoAnggaran = async (id) => {
  * Allocate budget to UKMs (Mitra only).
  */
 export const alokasikanAnggaran = async (signer, id, kegiatan, ukmAddresses, anggaranUkm) => {
-  if (!id || !ukmAddresses || ukmAddresses.length === 0) {
+  if (id === undefined || id === null || id === '' || !ukmAddresses || ukmAddresses.length === 0) {
     throw new Error('ID dan setidaknya satu alamat UKM wajib diisi');
   }
+  ensureBytes32Compatible(kegiatan, 'Kegiatan');
 
   try {
     const contract = new Contract(CONTRACT_ADDRESS, contractABI.abi, signer);
@@ -227,7 +241,7 @@ export const getAnggaranUntukUKMById = async (id, address) => {
     const [ukmItem] = ukmBudgetData;
     const alokasiUKM = ukmItem.alokasi;
 
-    const [roleMitra, kodeMitra] = await getUserDetails(mitraPengalokasi);
+    const [, kodeMitra] = await getUserDetails(mitraPengalokasi);
 
     return [
       safeDecode(budgetData[2]), // kodePemerintah

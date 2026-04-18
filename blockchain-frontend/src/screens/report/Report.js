@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, View, StyleSheet, TouchableOpacity } from "react-native";
-import { Text, useTheme } from "react-native-paper";
+import { ScrollView, View, StyleSheet } from "react-native";
+import { Button, Text, useTheme } from "react-native-paper";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ethers } from "ethers";
 import DrawerWithContent from "../../navigation/DrawerWithContent";
@@ -20,6 +21,14 @@ const formatToJuta = (value) =>
 
 const formatDateTime = (timestamp) =>
   dayjs(parseInt(timestamp.toString()) * 1000).format("DD MMM YYYY HH:mm");
+
+const safeDecode = (value) => {
+  try {
+    return value ? ethers.decodeBytes32String(value) : "-";
+  } catch {
+    return "-";
+  }
+};
 
 export default function AnggaranListByPemerintah({ navigation }) {
   const [items, setItems] = useState([]);
@@ -45,10 +54,10 @@ export default function AnggaranListByPemerintah({ navigation }) {
           const detail = await contract.getAnggaran(item.id);
 
           let include = false;
-          if (roleUser === 'PEMERINTAH' && detail[1].toLowerCase() === address.toLowerCase()) include = true;
-          if (roleUser === 'MITRA' && detail[7].toLowerCase() === address.toLowerCase()) include = true;
+          if (address && roleUser === 'PEMERINTAH' && detail[1].toLowerCase() === address.toLowerCase()) include = true;
+          if (address && roleUser === 'MITRA' && detail[7].toLowerCase() === address.toLowerCase()) include = true;
           const ukmList = detail[8];
-          if (roleUser === 'UKM' && Array.isArray(ukmList) && ukmList.some(a => a.toLowerCase() === address.toLowerCase())) include = true;
+          if (address && roleUser === 'UKM' && Array.isArray(ukmList) && ukmList.some(a => a.toLowerCase() === address.toLowerCase())) include = true;
 
           if (include) {
             dataLengkap.push({
@@ -115,7 +124,7 @@ export default function AnggaranListByPemerintah({ navigation }) {
                   <View style={styles.cardBody}>
                     <View style={styles.infoRow}>
                       <Text style={styles.label}>Agency Code</Text>
-                      <Text style={styles.value}>{ethers.decodeBytes32String(item.kodePemerintah)}</Text>
+                      <Text style={styles.value}>{safeDecode(item.kodePemerintah)}</Text>
                     </View>
                     <View style={styles.infoRow}>
                       <Text style={styles.label}>Amount</Text>
@@ -123,7 +132,7 @@ export default function AnggaranListByPemerintah({ navigation }) {
                     </View>
                     <View style={styles.infoRow}>
                       <Text style={styles.label}>Activity</Text>
-                      <Text style={styles.value}>{item.kegiatan ? ethers.decodeBytes32String(item.kegiatan) : 'Unassigned'}</Text>
+                      <Text style={styles.value}>{safeDecode(item.kegiatan)}</Text>
                     </View>
                     <View style={styles.infoRow}>
                       <Text style={styles.label}>Submitted</Text>

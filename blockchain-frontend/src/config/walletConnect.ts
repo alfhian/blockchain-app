@@ -1,6 +1,8 @@
 import { EthereumProvider } from '@walletconnect/ethereum-provider';
 
-let provider: EthereumProvider | null = null;
+type WalletConnectProvider = Awaited<ReturnType<typeof EthereumProvider.init>>;
+
+let provider: WalletConnectProvider | null = null;
 
 export const providerMetadata = {
   name: 'Bantuan UKM',
@@ -14,7 +16,8 @@ export const providerMetadata = {
 
 const defaultParams = {
   projectId: '1cce4f444c2ea269a7c1cd573eaf9f5c',
-  chains: [11155111],
+  chains: [11155111] as [number, ...number[]],
+  optionalChains: [11155111] as [number, ...number[]],
   showQrModal: true,
   rpcMap: {
     11155111: 'https://sepolia.infura.io/v3/847d18875da64f2c8eb298d41b1ee414',

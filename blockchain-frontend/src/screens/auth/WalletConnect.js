@@ -8,8 +8,6 @@ import {
 } from '@walletconnect/modal-react-native';
 import { providerMetadata } from '../../config/walletConnect';
 import LottieView from 'lottie-react-native';
-import { getUserDetails } from '../../utils/blockchain';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function WalletConnect({ navigation }) {
   const { provider } = useWalletConnectModal();
